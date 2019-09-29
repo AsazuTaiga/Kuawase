@@ -16,6 +16,7 @@ public class ModelImpl implements ModelInterface {
     private ModelImpl() {
     }
 
+    @NonNull
     public static ModelImpl getInstance() {
         if (MODEL_IMPL == null) {
             MODEL_IMPL = new ModelImpl();

@@ -22,7 +22,11 @@ class KukaiInfo {
     private Date endDate;
 
     KukaiInfo(@NonNull String name, @NonNull Date startDate, @NonNull Date endDate) {
-        this.uuid = UUID.randomUUID();
+        this(UUID.randomUUID(), name, startDate, endDate);
+    }
+
+    KukaiInfo(@NonNull UUID uuid, @NonNull String name, @NonNull Date startDate, @NonNull Date endDate) {
+        this.uuid = uuid;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -34,17 +38,17 @@ class KukaiInfo {
     }
 
     @NonNull
-    String getName() {
+    public String getName() {
         return name;
     }
 
     @NonNull
-    Date getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
     @NonNull
-    Date getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 }

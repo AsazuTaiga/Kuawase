@@ -21,24 +21,28 @@ class Haiku {
         this(haiku, author, DEFAULT_POINT);
     }
 
-    private Haiku(@NonNull String haiku, @NonNull String author, int point) {
+    Haiku(@NonNull String haiku, @NonNull String author, int point) {
+        this(haiku, author, point, null);
+    }
+
+    Haiku(@NonNull String haiku, @NonNull String author, int point, @Nullable KukaiInfo kukaiInfo) {
         this.haiku = haiku;
         this.author = author;
         this.point = point;
-        this.kukaiInfo = null;
+        this.kukaiInfo = kukaiInfo;
     }
 
     @NonNull
-    String getHaiku() {
+    public String getHaiku() {
         return haiku;
     }
 
     @NonNull
-    String getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    int getPoint() {
+    public int getPoint() {
         return point;
     }
 

@@ -3,6 +3,7 @@ package com.kuawase.model;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 class DatabaseOpenHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "kuawase.db";
@@ -16,14 +17,14 @@ class DatabaseOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String createKukaiInfoTable = "CREATE TABLE kukai_info_table(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "uuid INTEGER, " +
+                "uuid TEXT, " +
                 "name TEXT, " +
-                "start_date INTEGER, " +
-                "end_date INTEGER);";
+                "start_date TEXT, " +
+                "end_date TEXT);";
 
         String createHaikuTable = "CREATE TABLE haiku_table(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "kukai_id INTEGER, " +
+                "kukai_id BLOB, " +
                 "haiku TEXT, " +
                 "author TEXT, " +
                 "point INTEGER);";
