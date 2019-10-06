@@ -5,10 +5,11 @@ import androidx.annotation.NonNull;
 import java.util.Date;
 
 public class Model implements ModelInterface {
-    private Model singletonInstance;
+    private static Model singletonInstance;
     private KukaiInfo kukaiInfo;
 
-    public ModelInterface getInstance() {
+    @NonNull
+    public static ModelInterface getInstance() {
         if (null == singletonInstance) {
             singletonInstance = new Model();
         }
