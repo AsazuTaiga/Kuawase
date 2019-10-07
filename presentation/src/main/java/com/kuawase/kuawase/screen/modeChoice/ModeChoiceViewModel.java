@@ -1,7 +1,14 @@
 package com.kuawase.kuawase.screen.modeChoice;
 
+import android.os.Bundle;
+
 import androidx.lifecycle.ViewModel;
 
-public class ModeChoiceViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
+class ModeChoiceViewModel extends ViewModel {
+    void transitToParentMode() {
+        
+    }
+
+    void transitToChildMode() {
+    }
 }

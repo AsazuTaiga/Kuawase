@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 
 class KukaiInfo {
+    private final int id;
+
     @NonNull
     private final String name;
 
@@ -20,10 +22,15 @@ class KukaiInfo {
     private final List<HaikuInfo> haikuInfos;
 
     KukaiInfo(@NonNull String name, @NonNull Date startDate, @NonNull Date endDate) {
+        id = 0;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         haikuInfos = new ArrayList<>();
+    }
+
+    public int getId() {
+        return id;
     }
 
     @NonNull

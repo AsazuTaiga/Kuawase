@@ -25,7 +25,7 @@ public class Model implements ModelInterface {
 
     @NonNull
     @Override
-    public KukaiInfo getKukaiInfo() {
+    public KukaiInfo getKukaiInfo(int id) {
         return kukaiInfo;
     }
 }

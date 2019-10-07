@@ -9,5 +9,5 @@ public interface ModelInterface {
     KukaiInfo createKukaiInfo(@NonNull String name, @NonNull Date startDate, @NonNull Date endDate);
 
     @NonNull
-    KukaiInfo getKukaiInfo();
+    KukaiInfo getKukaiInfo(int id);
 }
