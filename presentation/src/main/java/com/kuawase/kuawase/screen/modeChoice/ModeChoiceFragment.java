@@ -1,5 +1,6 @@
 package com.kuawase.kuawase.screen.modeChoice;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -17,10 +18,16 @@ import com.kuawase.kuawase.R;
 
 public class ModeChoiceFragment extends Fragment {
 
+    @Nullable
     private ModeChoiceViewModel mViewModel;
+
+    @Nullable
     private Button parentButton;
+
+    @Nullable
     private Button childButton;
 
+    @NonNull
     public static ModeChoiceFragment newInstance() {
         return new ModeChoiceFragment();
     }
@@ -28,17 +35,25 @@ public class ModeChoiceFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.mode_choice_fragment, container, false);
-        parentButton = rootView.findViewById(R.id.parent_button);
-        childButton = rootView.findViewById(R.id.child_button);
-        return rootView;
+        return inflater.inflate(R.layout.mode_choice_fragment, container, false);
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        parentButton = view.findViewById(R.id.parent_button);
+        childButton = view.findViewById(R.id.child_button);
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(ModeChoiceViewModel.class);
-        parentButton.setOnClickListener(v -> mViewModel.transitToParentMode());
-        childButton.setOnClickListener(v -> mViewModel.transitToChildMode());
+        if (null != parentButton) {
+            parentButton.setOnClickListener(view -> mViewModel.transitToParentMode());
+        }
+        if (null != childButton) {
+            childButton.setOnClickListener(view -> mViewModel.transitToChildMode());
+        }
     }
-
 }
