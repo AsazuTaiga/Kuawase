@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel;
 
 class ModeChoiceViewModel extends ViewModel {
     void transitToParentMode() {
-        
     }
 
     void transitToChildMode() {
