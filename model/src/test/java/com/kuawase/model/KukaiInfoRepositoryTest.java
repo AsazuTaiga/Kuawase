@@ -7,9 +7,7 @@ import org.junit.Test;
 import java.util.Calendar;
 import java.util.Date;
 
-import static org.junit.Assert.*;
-
-public class ModelTest {
+public class KukaiInfoRepositoryTest {
     private final String kukaiName = "テスト句会";
     private final Calendar calendar = Calendar.getInstance();
     private Date startDate;
@@ -28,13 +26,13 @@ public class ModelTest {
 
     @Test
     public void getInstance() {
-        ModelInterface model = Model.getInstance();
+        KukaiInfoDataSource model = KukaiInfoRepository.getInstance();
         Assert.assertNotNull(model);
     }
 
     @Test
     public void createAndGetKukaiInfo() {
-        ModelInterface model = Model.getInstance();
+        KukaiInfoDataSource model = KukaiInfoRepository.getInstance();
         model.createKukaiInfo(kukaiName, startDate, endDate);
         KukaiInfo kukaiInfo = model.getKukaiInfo();
         Assert.assertEquals(kukaiName, kukaiInfo.getName());
@@ -44,7 +42,7 @@ public class ModelTest {
 
     @Test
     public void addHaikuInfoToKukaiInfo() {
-        ModelInterface model = Model.getInstance();
+        KukaiInfoDataSource model = KukaiInfoRepository.getInstance();
         model.createKukaiInfo(kukaiName, startDate, endDate);
         KukaiInfo kukaiInfo = model.getKukaiInfo();
 

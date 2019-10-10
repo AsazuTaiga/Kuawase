@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-class KukaiInfo {
-    private final int id;
+public class KukaiInfo {
+    private final int id = 0;
 
     @NonNull
     private final String name;
@@ -22,7 +22,6 @@ class KukaiInfo {
     private final List<HaikuInfo> haikuInfos;
 
     KukaiInfo(@NonNull String name, @NonNull Date startDate, @NonNull Date endDate) {
-        id = 0;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -50,6 +49,6 @@ class KukaiInfo {
 
     @NonNull
     public List<HaikuInfo> getHaikuInfos() {
-        return this.haikuInfos;
+        return haikuInfos;
     }
 }

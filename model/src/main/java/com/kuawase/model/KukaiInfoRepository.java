@@ -1,17 +1,21 @@
 package com.kuawase.model;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.Date;
 
-public class Model implements ModelInterface {
-    private static Model singletonInstance;
+public class KukaiInfoRepository implements KukaiInfoDataSource {
+    @Nullable
+    private static KukaiInfoRepository singletonInstance;
+
+    @Nullable
     private KukaiInfo kukaiInfo;
 
     @NonNull
-    public static ModelInterface getInstance() {
+    public static KukaiInfoDataSource getInstance() {
         if (null == singletonInstance) {
-            singletonInstance = new Model();
+            singletonInstance = new KukaiInfoRepository();
         }
         return singletonInstance;
     }
@@ -19,11 +23,13 @@ public class Model implements ModelInterface {
     @NonNull
     @Override
     public KukaiInfo createKukaiInfo(@NonNull String name, @NonNull Date startDate, @NonNull Date endDate) {
-        kukaiInfo = new KukaiInfo(name, startDate, endDate);
+        if (null == kukaiInfo) {
+            kukaiInfo = new KukaiInfo(name, startDate, endDate);
+        }
         return kukaiInfo;
     }
 
-    @NonNull
+    @Nullable
     @Override
     public KukaiInfo getKukaiInfo() {
         return kukaiInfo;
