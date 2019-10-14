@@ -3,15 +3,13 @@ package com.kuawase.model;
 import androidx.annotation.NonNull;
 
 public class HaikuInfo {
-    private static final int DEFAULT_POINT = 0;
-
     @NonNull
     private final String haiku;
 
     @NonNull
     private final String author;
 
-    private int point = DEFAULT_POINT;
+    private int point = 0;
 
     public HaikuInfo(@NonNull String haiku, @NonNull String author) {
         this.haiku = haiku;

@@ -1,15 +1,32 @@
 package com.kuawase.kuawase.screen.modeChoice;
 
-import android.os.Bundle;
-
-import androidx.fragment.app.FragmentManager;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-class ModeChoiceViewModel extends ViewModel {
-    void transitToParentMode() {
-        
+public class ModeChoiceViewModel extends ViewModel {
+    @NonNull
+    private final MutableLiveData<Object> onParentButtonClick = new MutableLiveData<>();
+
+    @NonNull
+    private final MutableLiveData<Object> onChildButotnClick = new MutableLiveData<>();
+
+    @NonNull
+    public LiveData<Object> getOnParentButtonClick() {
+        return onParentButtonClick;
     }
 
-    void transitToChildMode() {
+    @NonNull
+    public LiveData<Object> getOnChildButtonClick() {
+        return onChildButotnClick;
+    }
+
+    void onParentButtonClick() {
+        onParentButtonClick.setValue(new Object());
+    }
+
+    void onChildButtonClick() {
+        onChildButotnClick.setValue(new Object());
     }
 }

@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 public class KukaiInfoRepositoryTest {
     private final String kukaiName = "テスト句会";
@@ -26,18 +27,16 @@ public class KukaiInfoRepositoryTest {
 
     @Test
     public void getInstance() {
-        KukaiInfoDataSource model = KukaiInfoRepository.getInstance();
-        Assert.assertNotNull(model);
+        KukaiInfoDataSource dataSource = KukaiInfoRepository.getInstance();
+        Assert.assertNotNull(dataSource);
     }
 
     @Test
     public void createAndGetKukaiInfo() {
-        KukaiInfoDataSource model = KukaiInfoRepository.getInstance();
-        model.createKukaiInfo(kukaiName, startDate, endDate);
-        KukaiInfo kukaiInfo = model.getKukaiInfo();
-        Assert.assertEquals(kukaiName, kukaiInfo.getName());
-        Assert.assertEquals(startDate, kukaiInfo.getStartDate());
-        Assert.assertEquals(endDate, kukaiInfo.getEndDate());
+        KukaiInfoDataSource dataSource = KukaiInfoRepository.getInstance();
+        dataSource.createKukaiInfo(kukaiName, startDate, endDate);
+        KukaiInfo kukaiInfo = dataSource.getKukaiInfo();
+        Objects.requireNonNull(kukaiInfo);
     }
 
     @Test
@@ -45,10 +44,9 @@ public class KukaiInfoRepositoryTest {
         KukaiInfoDataSource model = KukaiInfoRepository.getInstance();
         model.createKukaiInfo(kukaiName, startDate, endDate);
         KukaiInfo kukaiInfo = model.getKukaiInfo();
-
-        HaikuInfo haikuInfo = new HaikuInfo(haiku, author);
-        kukaiInfo.getHaikuInfos().add(haikuInfo);
-        kukaiInfo.getHaikuInfos().get(0).setPoint(point);
-        Assert.assertEquals(point, kukaiInfo.getHaikuInfos().get(0).getPoint());
+        Objects.requireNonNull(kukaiInfo);
+        Assert.assertEquals(kukaiName, kukaiInfo.getName());
+        Assert.assertEquals(startDate, kukaiInfo.getStartDate());
+        Assert.assertEquals(endDate, kukaiInfo.getEndDate());
     }
 }

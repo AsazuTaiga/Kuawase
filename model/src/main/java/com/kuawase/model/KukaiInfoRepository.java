@@ -23,9 +23,7 @@ public class KukaiInfoRepository implements KukaiInfoDataSource {
     @NonNull
     @Override
     public KukaiInfo createKukaiInfo(@NonNull String name, @NonNull Date startDate, @NonNull Date endDate) {
-        if (null == kukaiInfo) {
-            kukaiInfo = new KukaiInfo(name, startDate, endDate);
-        }
+        kukaiInfo = new KukaiInfo(name, startDate, endDate);
         return kukaiInfo;
     }
 
@@ -33,5 +31,10 @@ public class KukaiInfoRepository implements KukaiInfoDataSource {
     @Override
     public KukaiInfo getKukaiInfo() {
         return kukaiInfo;
+    }
+
+    @Override
+    public void deleteKukaiInfo() {
+        kukaiInfo = null;
     }
 }

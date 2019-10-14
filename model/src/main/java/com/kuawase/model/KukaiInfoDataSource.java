@@ -11,4 +11,6 @@ public interface KukaiInfoDataSource {
 
     @Nullable
     KukaiInfo getKukaiInfo();
+
+    void deleteKukaiInfo();
 }
