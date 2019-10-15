@@ -1,12 +1,12 @@
 package com.kuawase.kuawase.screen.modeChoice;
 
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,13 +49,11 @@ public class ModeChoiceFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        viewModel = ViewModelProviders.of(this).get(ModeChoiceViewModel.class);
-
+        Objects.requireNonNull(getActivity());
         Objects.requireNonNull(parentButton);
-        parentButton.setOnClickListener(view -> viewModel.onParentButtonClick());
-
         Objects.requireNonNull(childButton);
+        viewModel = ViewModelProviders.of(getActivity()).get(ModeChoiceViewModel.class);
+        parentButton.setOnClickListener(view -> viewModel.onParentButtonClick());
         childButton.setOnClickListener(view -> viewModel.onChildButtonClick());
     }
 }
