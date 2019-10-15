@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ModeChoiceFragment modeChoiceFragment = ModeChoiceFragment.newInstance();
-        launchFragment(modeChoiceFragment);
+        getSupportFragmentManager().beginTransaction().add(R.id.container, modeChoiceFragment).commit();
     }
 
     @Override
@@ -36,6 +36,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .addToBackStack(null)
-                .replace(R.id.container_view, fragment).commit();
+                .replace(R.id.container, fragment).commit();
     }
 }
