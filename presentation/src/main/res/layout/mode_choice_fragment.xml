@@ -7,16 +7,16 @@
 
     <Button
         android:id="@+id/parent_button"
+        style="?buttonBarButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="親モード"
-        style="?buttonBarButtonStyle"/>
+        android:text="親モード" />
 
     <Button
         android:id="@+id/child_button"
+        style="?buttonBarButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="子モード"
-        style="?buttonBarButtonStyle"/>
+        android:text="子モード" />
 
 </LinearLayout>
