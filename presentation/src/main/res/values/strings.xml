@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Kuawase</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="haiku_hint">俳句を入力</string>
+    <string name="author_hint">作者名を入力</string>
+    <string name="submit">投句する</string>
+    <string name="qr_code_description">投句情報のQRコード表示</string>
 </resources>

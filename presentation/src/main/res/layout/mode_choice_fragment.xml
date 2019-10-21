@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen.modeChoice.ModeChoiceFragment">
+    tools:context=".screen.modechoice.ModeChoiceFragment">
 
     <Button
         android:id="@+id/parent_button"
