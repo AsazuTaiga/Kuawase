@@ -19,13 +19,12 @@ public class KukaiInfo {
     private final Date endDate;
 
     @NonNull
-    private final List<HaikuInfo> haikuInfos;
+    private final List<HaikuInfo> haikuInfos = new ArrayList<>();
 
     KukaiInfo(@NonNull String name, @NonNull Date startDate, @NonNull Date endDate) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
-        haikuInfos = new ArrayList<>();
     }
 
     public int getId() {
