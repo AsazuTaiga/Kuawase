@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        // モード選択画面
         ModeChoiceViewModel modeChoiceViewModel = ViewModelProviders.of(this).get(ModeChoiceViewModel.class);
         modeChoiceViewModel.getOnParentButtonClick().observe
                 (this, event -> launchFragment(KukaiInputFragment.newInstance()));
@@ -42,25 +41,19 @@ public class MainActivity extends AppCompatActivity {
                 (this, event -> launchFragment(HaikuSubmitFragment.newInstance()));
 
         // 親モード
-        // 句会情報入力画面
         KukaiInputViewModel kukaiInputViewModel = ViewModelProviders.of(this).get(KukaiInputViewModel.class);
 
-        // QRコード読み取り画面
         QRReadViewModel qrReadViewModel = ViewModelProviders.of(this).get(QRReadViewModel.class);
 
-        // 投句一覧(選句)画面
         HaikuListViewModel haikuListViewModel = ViewModelProviders.of(this).get(HaikuListViewModel.class);
 
-        // 結果表示画面
         ResultViewModel resultViewModel = ViewModelProviders.of(this).get(ResultViewModel.class);
 
         // 子モード
-        // 俳句投稿画面
         HaikuSubmittViewModel haikuSubmittViewModel = ViewModelProviders.of(this).get(HaikuSubmittViewModel.class);
         haikuSubmittViewModel.getOnSubmitButtonClick().observe
                 (this, event -> launchFragment(QRShowFragment.newInstance()));
 
-        // QRコード表示画面
         QRShowViewModel qrShowViewModel = ViewModelProviders.of(this).get(QRShowViewModel.class);
     }
 
