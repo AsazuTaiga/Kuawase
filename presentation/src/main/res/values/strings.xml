@@ -5,4 +5,5 @@
     <string name="author_hint">作者名を入力</string>
     <string name="submit">投句する</string>
     <string name="qr_code_description">投句情報のQRコード表示</string>
+    <string name="kukai_name_hint">句会名を入力</string>
 </resources>

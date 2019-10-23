@@ -9,15 +9,18 @@ import androidx.lifecycle.ViewModelProviders;
 import com.kuawase.kuawase.R;
 import com.kuawase.kuawase.screen.haikulist.HaikuListViewModel;
 import com.kuawase.kuawase.screen.haikusubmit.HaikuSubmitFragment;
-import com.kuawase.kuawase.screen.haikusubmit.HaikuSubmittViewModel;
+import com.kuawase.kuawase.screen.haikusubmit.HaikuSubmitViewModel;
 import com.kuawase.kuawase.screen.kukaiinput.KukaiInputFragment;
 import com.kuawase.kuawase.screen.kukaiinput.KukaiInputViewModel;
 import com.kuawase.kuawase.screen.modechoice.ModeChoiceFragment;
 import com.kuawase.kuawase.screen.modechoice.ModeChoiceViewModel;
-import com.kuawase.kuawase.screen.qeshow.QRShowFragment;
-import com.kuawase.kuawase.screen.qeshow.QRShowViewModel;
+import com.kuawase.kuawase.screen.qrshow.QRShowFragment;
+import com.kuawase.kuawase.screen.qrshow.QRShowViewModel;
 import com.kuawase.kuawase.screen.qrread.QRReadViewModel;
 import com.kuawase.kuawase.screen.result.ResultViewModel;
+import com.kuawase.model.HaikuInfo;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,9 +53,10 @@ public class MainActivity extends AppCompatActivity {
         ResultViewModel resultViewModel = ViewModelProviders.of(this).get(ResultViewModel.class);
 
         // 子モード
-        HaikuSubmittViewModel haikuSubmittViewModel = ViewModelProviders.of(this).get(HaikuSubmittViewModel.class);
-        haikuSubmittViewModel.getOnSubmitButtonClick().observe
-                (this, event -> launchFragment(QRShowFragment.newInstance()));
+        HaikuSubmitViewModel haikuSubmitViewModel = ViewModelProviders.of(this).get(HaikuSubmitViewModel.class);
+//        String[] contents = Objects.requireNonNull(haikuSubmitViewModel.getOnSubmitButtonClick().getValue()).getContentIfNotHandled();
+//        haikuSubmitViewModel.getOnSubmitButtonClick().observe
+//                (this, event -> launchFragment(QRShowFragment.newInstance(Objects.requireNonNull(contents))));
 
         QRShowViewModel qrShowViewModel = ViewModelProviders.of(this).get(QRShowViewModel.class);
     }

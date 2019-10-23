@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    tools:context=".screen.qeshow.QRShowFragment">
+    tools:context=".screen.qrshow.QRShowFragment">
 
     <ImageView
         android:id="@+id/qr_code_view"

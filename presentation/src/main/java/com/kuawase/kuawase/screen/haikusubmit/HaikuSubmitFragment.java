@@ -20,7 +20,7 @@ import java.util.Objects;
 public class HaikuSubmitFragment extends Fragment {
 
     @Nullable
-    private HaikuSubmittViewModel viewModel;
+    private HaikuSubmitViewModel viewModel;
 
     @Nullable
     private EditText haikuEdit;
@@ -55,7 +55,7 @@ public class HaikuSubmitFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         FragmentActivity parentActivity = getActivity();
         Objects.requireNonNull(parentActivity);
-        viewModel = ViewModelProviders.of(parentActivity).get(HaikuSubmittViewModel.class);
+        viewModel = ViewModelProviders.of(parentActivity).get(HaikuSubmitViewModel.class);
 
         Objects.requireNonNull(haikuEdit);
         Objects.requireNonNull(authorEdit);
