@@ -53,7 +53,7 @@ public class HaikuSubmitFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        FragmentActivity parentActivity = getActivity();
+        final FragmentActivity parentActivity = getActivity();
         Objects.requireNonNull(parentActivity);
         viewModel = ViewModelProviders.of(parentActivity).get(HaikuSubmitViewModel.class);
 

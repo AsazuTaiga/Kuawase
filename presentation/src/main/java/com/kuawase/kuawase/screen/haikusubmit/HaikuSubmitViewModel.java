@@ -23,7 +23,7 @@ public class HaikuSubmitViewModel extends ViewModel {
     }
 
     void onSubmitButtonClick(@NonNull String haiku, @NonNull String author) {
-        String[] strings = {haiku, author};
+        final String[] strings = {haiku, author};
         submitHaiku.setValue(new Event<>(strings));
     }
 }
