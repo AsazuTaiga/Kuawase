@@ -26,6 +26,7 @@
         android:text="開始日時を選択"/>
 
     <TextView
+        android:id="@+id/start_date_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -36,7 +37,14 @@
         android:text="終了日時を選択"/>
 
     <TextView
+        android:id="@+id/end_date_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/finish_input_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="入力完了" />
 
 </LinearLayout>

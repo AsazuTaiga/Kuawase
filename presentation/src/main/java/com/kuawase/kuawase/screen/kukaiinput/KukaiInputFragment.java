@@ -1,20 +1,27 @@
 package com.kuawase.kuawase.screen.kukaiinput;
 
-import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.kuawase.kuawase.R;
 import com.kuawase.kuawase.utility.SelectDateFragment;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Objects;
 
 public class KukaiInputFragment extends Fragment {
     @Nullable
@@ -27,7 +34,16 @@ public class KukaiInputFragment extends Fragment {
     private Button startDateButton;
 
     @Nullable
+    private TextView startDateText;
+
+    @Nullable
     private Button endDateButton;
+
+    @Nullable
+    private TextView endDateText;
+
+    @Nullable
+    private Button finishInputButton;
 
     public static KukaiInputFragment newInstance() {
         return new KukaiInputFragment();
@@ -45,7 +61,10 @@ public class KukaiInputFragment extends Fragment {
 
         kukaiNameEdit = view.findViewById(R.id.kukai_name_edit);
         startDateButton = view.findViewById(R.id.start_date_button);
+        startDateText = view.findViewById(R.id.start_date_text);
         endDateButton = view.findViewById(R.id.end_date_button);
+        endDateText = view.findViewById(R.id.end_date_text);
+        finishInputButton = view.findViewById(R.id.finish_input_button);
     }
 
     @Override
@@ -53,6 +72,39 @@ public class KukaiInputFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         viewModel = ViewModelProviders.of(this).get(KukaiInputViewModel.class);
 
+        FragmentManager fragmentManager = getFragmentManager();
+        Objects.requireNonNull(fragmentManager);
+        SelectDateFragment startDateFragment = new SelectDateFragment();
+        SelectDateFragment endDateFragment = new SelectDateFragment();
+
+        Objects.requireNonNull(startDateButton);
+        Objects.requireNonNull(startDateText);
+
+        startDateFragment.setTextView(startDateText);
+        startDateButton.setOnClickListener(l -> startDateFragment.show(fragmentManager, null));
+
+        Objects.requireNonNull(endDateButton);
+        Objects.requireNonNull(endDateText);
+
+        endDateFragment.setTextView(endDateText);
+        endDateButton.setOnClickListener(l -> endDateFragment.show(fragmentManager, null));
+
+        Objects.requireNonNull(kukaiNameEdit);
+        Objects.requireNonNull(finishInputButton);
+        finishInputButton.setOnClickListener(l -> viewModel.onFinishInputButtonClick(kukaiNameEdit.getText().toString(),
+                parse(startDateText.getText().toString()), parse(endDateText.getText().toString())));
     }
 
+    @NonNull
+    private Date parse(@NonNull String string) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日", Locale.JAPAN);
+        Date date = new Date();
+        try {
+            date = sdf.parse(string);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Objects.requireNonNull(date);
+        return date;
+    }
 }

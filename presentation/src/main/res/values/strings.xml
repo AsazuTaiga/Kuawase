@@ -6,4 +6,5 @@
     <string name="submit">投句する</string>
     <string name="qr_code_description">投句情報のQRコード表示</string>
     <string name="kukai_name_hint">句会名を入力</string>
+    <string name="date_format">%1$d年%2$d月%3$d日</string>
 </resources>

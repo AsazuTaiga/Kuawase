@@ -21,16 +21,25 @@ public class QRReadFragment extends Fragment {
     @Nullable
     private QRReadViewModel viewModel;
 
+    private int kukaiId;
+
     @Nullable
     private ImageView QRCodeView;
 
-    public static QRReadFragment newInstance() {
+    public static QRReadFragment newInstance(int kukaiId) {
+        QRReadFragment fragment = new QRReadFragment();
+        Bundle args = fragment.getArguments();
+        Objects.requireNonNull(args);
+        args.putInt("kukaiId", kukaiId);
         return new QRReadFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        Bundle args = getArguments();
+        Objects.requireNonNull(args);
+        this.kukaiId = args.getInt("kukaiId");
         return inflater.inflate(R.layout.qr_read_fragment, container, false);
     }
 

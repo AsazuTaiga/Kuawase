@@ -14,13 +14,10 @@ import com.kuawase.kuawase.screen.kukaiinput.KukaiInputFragment;
 import com.kuawase.kuawase.screen.kukaiinput.KukaiInputViewModel;
 import com.kuawase.kuawase.screen.modechoice.ModeChoiceFragment;
 import com.kuawase.kuawase.screen.modechoice.ModeChoiceViewModel;
-import com.kuawase.kuawase.screen.qrshow.QRShowFragment;
-import com.kuawase.kuawase.screen.qrshow.QRShowViewModel;
+import com.kuawase.kuawase.screen.qrread.QRReadFragment;
 import com.kuawase.kuawase.screen.qrread.QRReadViewModel;
+import com.kuawase.kuawase.screen.qrshow.QRShowViewModel;
 import com.kuawase.kuawase.screen.result.ResultViewModel;
-import com.kuawase.model.HaikuInfo;
-
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
 
         // 親モード
         KukaiInputViewModel kukaiInputViewModel = ViewModelProviders.of(this).get(KukaiInputViewModel.class);
+        int kukaiId = 0;
+        kukaiInputViewModel.getOnFinishInputButtonClick().observe
+                (this, event -> launchFragment(QRReadFragment.newInstance(kukaiId)));
 
         QRReadViewModel qrReadViewModel = ViewModelProviders.of(this).get(QRReadViewModel.class);
 

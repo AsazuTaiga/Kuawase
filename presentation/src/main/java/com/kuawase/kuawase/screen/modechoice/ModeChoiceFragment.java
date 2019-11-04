@@ -54,7 +54,7 @@ public class ModeChoiceFragment extends Fragment {
 
         Objects.requireNonNull(parentButton);
         Objects.requireNonNull(childButton);
-        parentButton.setOnClickListener(view -> viewModel.onParentButtonClick());
-        childButton.setOnClickListener(view -> viewModel.onChildButtonClick());
+        parentButton.setOnClickListener(l -> viewModel.onParentButtonClick());
+        childButton.setOnClickListener(l -> viewModel.onChildButtonClick());
     }
 }
