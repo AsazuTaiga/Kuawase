@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -70,7 +71,9 @@ public class KukaiInputFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = ViewModelProviders.of(this).get(KukaiInputViewModel.class);
+        FragmentActivity parentActivity = getActivity();
+        Objects.requireNonNull(parentActivity);
+        viewModel = ViewModelProviders.of(parentActivity).get(KukaiInputViewModel.class);
 
         FragmentManager fragmentManager = getFragmentManager();
         Objects.requireNonNull(fragmentManager);

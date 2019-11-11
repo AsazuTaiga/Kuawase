@@ -18,6 +18,9 @@ import com.kuawase.kuawase.screen.qrread.QRReadFragment;
 import com.kuawase.kuawase.screen.qrread.QRReadViewModel;
 import com.kuawase.kuawase.screen.qrshow.QRShowViewModel;
 import com.kuawase.kuawase.screen.result.ResultViewModel;
+import com.kuawase.kuawase.utility.Event;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,9 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
         // 親モード
         KukaiInputViewModel kukaiInputViewModel = ViewModelProviders.of(this).get(KukaiInputViewModel.class);
-        int kukaiId = 0;
         kukaiInputViewModel.getOnFinishInputButtonClick().observe
-                (this, event -> launchFragment(QRReadFragment.newInstance(kukaiId)));
+                (this, event -> launchFragment(QRReadFragment.newInstance(event.getContentIfNotHandled())));
 
         QRReadViewModel qrReadViewModel = ViewModelProviders.of(this).get(QRReadViewModel.class);
 

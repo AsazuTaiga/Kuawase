@@ -1,7 +1,5 @@
 package com.kuawase.kuawase.screen.kukaiinput;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -29,6 +27,5 @@ public class KukaiInputViewModel extends ViewModel {
     void onFinishInputButtonClick(@NonNull String kukaiName, @NonNull Date startDate, @NonNull Date endDate) {
         KukaiInfo kukaiInfo = dataSource.createKukaiInfo(kukaiName, startDate, endDate);
         onFinishInputButtonClick.setValue(new Event<>(kukaiInfo.getId()));
-        Log.i("finishButton", "click");
     }
 }
