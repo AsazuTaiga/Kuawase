@@ -17,18 +17,21 @@ public class QRReadViewModel extends ViewModel {
     private KukaiInfoDataSource dataSource = KukaiInfoRepository.getInstance();
 
     @Nullable
-    private KukaiInfo kukaiInfo = dataSource.getKukaiInfo();
+    private KukaiInfo kukaiInfo;
 
     @Nullable
     private List<HaikuInfo> haikuInfos;
 
-    void onReadQRCode(String haikuInfoString) {
+    void onReadQRCode(@NonNull String haikuInfoString) {
+        if (null == kukaiInfo) {
+            kukaiInfo = dataSource.getKukaiInfo();
+        }
         if (null == haikuInfos) {
             Objects.requireNonNull(kukaiInfo);
             haikuInfos = kukaiInfo.getHaikuInfos();
         }
         Objects.requireNonNull(haikuInfos);
         String[] haikuInfoStringArray = haikuInfoString.split(";");
-        haikuInfos.add(new HaikuInfo(haikuInfoStringArray[1], haikuInfoStringArray[2]));
+        haikuInfos.add(new HaikuInfo(haikuInfoStringArray[0], haikuInfoStringArray[1]));
     }
 }

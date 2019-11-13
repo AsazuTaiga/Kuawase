@@ -34,6 +34,7 @@ public class QRReadFragment extends Fragment {
     @Nullable
     private TextView resultText;
 
+    @NonNull
     public static QRReadFragment newInstance(int kukaiId) {
         Bundle args = new Bundle();
         args.putInt("kukaiId", kukaiId);
@@ -72,7 +73,7 @@ public class QRReadFragment extends Fragment {
             @Override
             public void barcodeResult(BarcodeResult result) {
                 viewModel.onReadQRCode(result.getText());
-                resultText.setText(result.getText().split(";")[1]);
+                resultText.setText(result.getText().split(";")[0]);
             }
 
             @Override
