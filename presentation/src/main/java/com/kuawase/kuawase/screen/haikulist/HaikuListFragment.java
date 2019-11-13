@@ -1,16 +1,14 @@
 package com.kuawase.kuawase.screen.haikulist;
 
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.kuawase.kuawase.R;
 
@@ -18,7 +16,7 @@ public class HaikuListFragment extends Fragment {
 
     private HaikuListViewModel mViewModel;
 
-    public static HaikuListFragment newInstance() {
+    public static HaikuListFragment newInstance(int kukaiId) {
         return new HaikuListFragment();
     }
 

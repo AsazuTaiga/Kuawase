@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,13 +27,14 @@ public class QRReadFragment extends Fragment {
     @Nullable
     private QRReadViewModel viewModel;
 
-    private int kukaiId;
-
     @Nullable
     private CompoundBarcodeView barcodeScanner;
 
     @Nullable
     private TextView resultText;
+
+    @Nullable
+    private Button finishReadButton;
 
     @NonNull
     public static QRReadFragment newInstance(int kukaiId) {
@@ -46,9 +48,6 @@ public class QRReadFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        Bundle args = getArguments();
-        Objects.requireNonNull(args);
-        this.kukaiId = args.getInt("kukaiId");
         return inflater.inflate(R.layout.qr_read_fragment, container, false);
     }
 
@@ -57,6 +56,7 @@ public class QRReadFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         barcodeScanner = view.findViewById(R.id.zxing_barcode_scanner);
         resultText = view.findViewById(R.id.result_text);
+        finishReadButton = view.findViewById(R.id.finish_read_button);
     }
 
     @Override
@@ -66,6 +66,11 @@ public class QRReadFragment extends Fragment {
         FragmentActivity parentActivity = getActivity();
         Objects.requireNonNull(parentActivity);
         viewModel = ViewModelProviders.of(parentActivity).get(QRReadViewModel.class);
+
+        Bundle args = getArguments();
+        Objects.requireNonNull(args);
+        Objects.requireNonNull(viewModel);
+        viewModel.setKukaiId(args.getInt("kukaiId"));
 
         Objects.requireNonNull(barcodeScanner);
         Objects.requireNonNull(resultText);
@@ -80,6 +85,9 @@ public class QRReadFragment extends Fragment {
             public void possibleResultPoints(List<ResultPoint> resultPoints) {
             }
         });
+
+        Objects.requireNonNull(finishReadButton);
+        finishReadButton.setOnClickListener(l -> viewModel.onFinishInputButtonClick());
     }
 
     @Override
