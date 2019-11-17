@@ -37,10 +37,11 @@ public class QRReadFragment extends Fragment {
     private Button finishReadButton;
 
     @NonNull
-    public static QRReadFragment newInstance(int kukaiId) {
+    public static QRReadFragment newInstance(@Nullable Integer kukaiId) {
+        Objects.requireNonNull(kukaiId);
+        QRReadFragment fragment = new QRReadFragment();
         Bundle args = new Bundle();
         args.putInt("kukaiId", kukaiId);
-        QRReadFragment fragment = new QRReadFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -87,7 +88,7 @@ public class QRReadFragment extends Fragment {
         });
 
         Objects.requireNonNull(finishReadButton);
-        finishReadButton.setOnClickListener(l -> viewModel.onFinishInputButtonClick());
+        finishReadButton.setOnClickListener(l -> viewModel.onFinishReadButtonClick());
     }
 
     @Override

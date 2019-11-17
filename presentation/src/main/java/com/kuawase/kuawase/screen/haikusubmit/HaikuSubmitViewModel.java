@@ -15,15 +15,15 @@ public class HaikuSubmitViewModel extends ViewModel {
     private final MutableLiveData<String> author = new MutableLiveData<>();
 
     @NonNull
-    private MutableLiveData<Event<String[]>> submitHaiku = new MutableLiveData<>();
+    private MutableLiveData<Event<String>> onSubmitButtonClick = new MutableLiveData<>();
 
     @NonNull
-    public LiveData<Event<String[]>> getOnSubmitButtonClick() {
-        return submitHaiku;
+    public LiveData<Event<String>> getOnSubmitButtonClick() {
+        return onSubmitButtonClick;
     }
 
     void onSubmitButtonClick(@NonNull String haiku, @NonNull String author) {
-        final String[] strings = {haiku, author};
-        submitHaiku.setValue(new Event<>(strings));
+        final String content = haiku + ";" + author;
+        onSubmitButtonClick.setValue(new Event<>(content));
     }
 }

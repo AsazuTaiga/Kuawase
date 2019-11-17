@@ -12,11 +12,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.kuawase.kuawase.R;
 
+import java.util.Objects;
+
 public class HaikuListFragment extends Fragment {
 
-    private HaikuListViewModel mViewModel;
+    private HaikuListViewModel viewModel;
 
-    public static HaikuListFragment newInstance(int kukaiId) {
+    public static HaikuListFragment newInstance(@Nullable Integer kukaiId) {
+        Objects.requireNonNull(kukaiId);
+        HaikuListFragment fragment = new HaikuListFragment();
+        Bundle args = new Bundle();
+        args.putInt("kukaiId", kukaiId);
         return new HaikuListFragment();
     }
 
@@ -29,7 +35,7 @@ public class HaikuListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(HaikuListViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(HaikuListViewModel.class);
         // TODO: Use the ViewModel
     }
 

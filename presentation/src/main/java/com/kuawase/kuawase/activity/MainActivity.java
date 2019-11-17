@@ -17,6 +17,7 @@ import com.kuawase.kuawase.screen.modechoice.ModeChoiceFragment;
 import com.kuawase.kuawase.screen.modechoice.ModeChoiceViewModel;
 import com.kuawase.kuawase.screen.qrread.QRReadFragment;
 import com.kuawase.kuawase.screen.qrread.QRReadViewModel;
+import com.kuawase.kuawase.screen.qrshow.QRShowFragment;
 import com.kuawase.kuawase.screen.qrshow.QRShowViewModel;
 import com.kuawase.kuawase.screen.result.ResultViewModel;
 
@@ -56,9 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
         // 子モード
         HaikuSubmitViewModel haikuSubmitViewModel = ViewModelProviders.of(this).get(HaikuSubmitViewModel.class);
-//        String[] contents = Objects.requireNonNull(haikuSubmitViewModel.getOnSubmitButtonClick().getValue()).getContentIfNotHandled();
-//        haikuSubmitViewModel.getOnSubmitButtonClick().observe
-//                (this, event -> launchFragment(QRShowFragment.newInstance(Objects.requireNonNull(contents))));
+        haikuSubmitViewModel.getOnSubmitButtonClick().observe
+                (this, event -> launchFragment(QRShowFragment.newInstance(event.getContentIfNotHandled())));
 
         QRShowViewModel qrShowViewModel = ViewModelProviders.of(this).get(QRShowViewModel.class);
     }

@@ -28,15 +28,15 @@ public class QRReadViewModel extends ViewModel {
     private List<HaikuInfo> haikuInfos;
 
     @NonNull
-    private MutableLiveData<Event<Integer>> finishReadButtonClick = new MutableLiveData<>();
+    private MutableLiveData<Event<Integer>> onFinishReadButtonClick = new MutableLiveData<>();
 
     @NonNull
     public LiveData<Event<Integer>> getOnFinishReadButtonClick() {
-        return finishReadButtonClick;
+        return onFinishReadButtonClick;
     }
 
-    void onFinishInputButtonClick() {
-        finishReadButtonClick.setValue(new Event<>(kukaiId));
+    void onFinishReadButtonClick() {
+        onFinishReadButtonClick.setValue(new Event<>(kukaiId));
     }
 
     void onReadQRCode(@NonNull String haikuInfoString) {

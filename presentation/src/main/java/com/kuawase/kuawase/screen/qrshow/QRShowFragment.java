@@ -2,13 +2,14 @@ package com.kuawase.kuawase.screen.qrshow;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.kuawase.kuawase.R;
@@ -20,13 +21,17 @@ public class QRShowFragment extends Fragment {
     private QRShowViewModel viewModel;
 
     @Nullable
-    private SurfaceView qrCodeView;
+    private ImageView qrCodeImage;
 
-    public static QRShowFragment newInstance(@NonNull String[] contents) {
+    private int qrCodeImageWidth;
+
+    private int qrCodeImageHeight;
+
+    public static QRShowFragment newInstance(@Nullable String content) {
+        Objects.requireNonNull(content);
         QRShowFragment fragment = new QRShowFragment();
         Bundle args = new Bundle();
-        args.putString("haiku", contents[0]);
-        args.putString("author", contents[1]);
+        args.putString("content", content);
         fragment.setArguments(args);
         return fragment;
     }
@@ -40,19 +45,21 @@ public class QRShowFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        qrCodeView = view.findViewById(R.id.qr_code_view);
+        qrCodeImage = view.findViewById(R.id.qr_code_image);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = ViewModelProviders.of(this).get(QRShowViewModel.class);
-        Objects.requireNonNull(viewModel);
+        FragmentActivity parentActivity = getActivity();
+        Objects.requireNonNull(parentActivity);
+        viewModel = ViewModelProviders.of(parentActivity).get(QRShowViewModel.class);
 
         Bundle args = Objects.requireNonNull(getArguments());
-        viewModel.haiku.setValue(args.getString("haiku"));
-        viewModel.author.setValue(args.getString("author"));
-
-        // TODO:Show QR code.
+        String content = args.getString("content");
+        Objects.requireNonNull(viewModel);
+        Objects.requireNonNull(qrCodeImage);
+        Objects.requireNonNull(content);
+        viewModel.showQrCodeDrawable(qrCodeImage, content);
     }
 }
