@@ -24,18 +24,18 @@ public class HaikuListFragment extends Fragment {
     private HaikuListFragment() {
     }
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.haiku_list_fragment, container, false);
-    }
-
     public static HaikuListFragment newInstance(@Nullable Integer kukaiId) {
         Objects.requireNonNull(kukaiId);
         HaikuListFragment fragment = new HaikuListFragment();
         Bundle args = new Bundle();
         args.putInt(KEY, kukaiId);
         return new HaikuListFragment();
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.haiku_list_fragment, container, false);
     }
 
     @Override

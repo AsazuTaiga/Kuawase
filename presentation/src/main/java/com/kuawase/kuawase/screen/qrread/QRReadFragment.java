@@ -40,6 +40,16 @@ public class QRReadFragment extends Fragment {
     private QRReadFragment() {
     }
 
+    @NonNull
+    public static QRReadFragment newInstance(@Nullable Integer kukaiId) {
+        Objects.requireNonNull(kukaiId);
+        QRReadFragment fragment = new QRReadFragment();
+        Bundle args = new Bundle();
+        args.putInt(KEY, kukaiId);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -52,16 +62,6 @@ public class QRReadFragment extends Fragment {
         barcodeScanner = view.findViewById(R.id.zxing_barcode_scanner);
         resultText = view.findViewById(R.id.result_text);
         finishReadButton = view.findViewById(R.id.finish_read_button);
-    }
-
-    @NonNull
-    public static QRReadFragment newInstance(@Nullable Integer kukaiId) {
-        Objects.requireNonNull(kukaiId);
-        QRReadFragment fragment = new QRReadFragment();
-        Bundle args = new Bundle();
-        args.putInt(KEY, kukaiId);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override

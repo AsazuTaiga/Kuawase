@@ -21,15 +21,15 @@ public class ResultFragment extends Fragment {
     private ResultFragment() {
     }
 
+    @NonNull
+    public static ResultFragment newInstance() {
+        return new ResultFragment();
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.result_fragment, container, false);
-    }
-
-    @NonNull
-    public static ResultFragment newInstance() {
-        return new ResultFragment();
     }
 
     @Override

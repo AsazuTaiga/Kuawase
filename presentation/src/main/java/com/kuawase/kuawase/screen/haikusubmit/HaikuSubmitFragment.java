@@ -29,6 +29,9 @@ public class HaikuSubmitFragment extends Fragment {
     @Nullable
     private Button submitButton;
 
+    private HaikuSubmitFragment() {
+    }
+
     public static HaikuSubmitFragment newInstance() {
         return new HaikuSubmitFragment();
     }
@@ -46,9 +49,6 @@ public class HaikuSubmitFragment extends Fragment {
         haikuEdit = view.findViewById(R.id.haiku_edit);
         authorEdit = view.findViewById(R.id.author_edit);
         submitButton = view.findViewById(R.id.submit_button);
-    }
-
-    private HaikuSubmitFragment() {
     }
 
     @Override

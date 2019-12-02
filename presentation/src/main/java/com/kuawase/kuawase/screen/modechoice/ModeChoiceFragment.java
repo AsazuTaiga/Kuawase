@@ -25,6 +25,9 @@ public class ModeChoiceFragment extends Fragment {
     @Nullable
     private Button childButton;
 
+    private ModeChoiceFragment() {
+    }
+
     @NonNull
     public static ModeChoiceFragment newInstance() {
         return new ModeChoiceFragment();
@@ -41,9 +44,6 @@ public class ModeChoiceFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         parentButton = view.findViewById(R.id.parent_button);
         childButton = view.findViewById(R.id.child_button);
-    }
-
-    private ModeChoiceFragment() {
     }
 
     @Override

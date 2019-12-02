@@ -44,6 +44,9 @@ public class KukaiInputFragment extends Fragment {
     @Nullable
     private Button finishInputButton;
 
+    private KukaiInputFragment() {
+    }
+
     public static KukaiInputFragment newInstance() {
         return new KukaiInputFragment();
     }
@@ -64,9 +67,6 @@ public class KukaiInputFragment extends Fragment {
         endDateButton = view.findViewById(R.id.end_date_button);
         endDateText = view.findViewById(R.id.end_date_text);
         finishInputButton = view.findViewById(R.id.finish_input_button);
-    }
-
-    private KukaiInputFragment() {
     }
 
     @NonNull

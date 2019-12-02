@@ -27,6 +27,15 @@ public class QRShowFragment extends Fragment {
     private QRShowFragment() {
     }
 
+    public static QRShowFragment newInstance(@Nullable String content) {
+        Objects.requireNonNull(content);
+        QRShowFragment fragment = new QRShowFragment();
+        Bundle args = new Bundle();
+        args.putString(KEY, content);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -37,15 +46,6 @@ public class QRShowFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         qrCodeImage = view.findViewById(R.id.qr_code_image);
-    }
-
-    public static QRShowFragment newInstance(@Nullable String content) {
-        Objects.requireNonNull(content);
-        QRShowFragment fragment = new QRShowFragment();
-        Bundle args = new Bundle();
-        args.putString(KEY, content);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
