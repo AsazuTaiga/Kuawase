@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModel;
 
 import com.kuawase.kuawase.R;
 import com.kuawase.kuawase.screen.haikulist.HaikuListFragment;
@@ -18,11 +18,10 @@ import com.kuawase.kuawase.screen.modechoice.ModeChoiceViewModel;
 import com.kuawase.kuawase.screen.qrread.QRReadFragment;
 import com.kuawase.kuawase.screen.qrread.QRReadViewModel;
 import com.kuawase.kuawase.screen.qrshow.QRShowFragment;
-import com.kuawase.kuawase.screen.qrshow.QRShowViewModel;
 import com.kuawase.kuawase.screen.result.ResultViewModel;
+import com.kuawase.kuawase.utility.ViewModelUtils;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,31 +35,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        ModeChoiceViewModel modeChoiceViewModel = ViewModelProviders.of(this).get(ModeChoiceViewModel.class);
+        ModeChoiceViewModel modeChoiceViewModel = getViewModel(ModeChoiceViewModel.class);
         modeChoiceViewModel.getOnParentButtonClick().observe
                 (this, event -> launchFragment(KukaiInputFragment.newInstance()));
         modeChoiceViewModel.getOnChildButtonClick().observe
                 (this, event -> launchFragment(HaikuSubmitFragment.newInstance()));
 
-        // 親モード
-        KukaiInputViewModel kukaiInputViewModel = ViewModelProviders.of(this).get(KukaiInputViewModel.class);
+        KukaiInputViewModel kukaiInputViewModel = getViewModel(KukaiInputViewModel.class);
         kukaiInputViewModel.getOnFinishInputButtonClick().observe
                 (this, event -> launchFragment(QRReadFragment.newInstance(event.getContentIfNotHandled())));
 
-        QRReadViewModel qrReadViewModel = ViewModelProviders.of(this).get(QRReadViewModel.class);
+        QRReadViewModel qrReadViewModel = getViewModel(QRReadViewModel.class);
         qrReadViewModel.getOnFinishReadButtonClick().observe
                 (this, event -> launchFragment(HaikuListFragment.newInstance(event.getContentIfNotHandled())));
 
-        HaikuListViewModel haikuListViewModel = ViewModelProviders.of(this).get(HaikuListViewModel.class);
+        HaikuListViewModel haikuListViewModel = getViewModel(HaikuListViewModel.class);
 
-        ResultViewModel resultViewModel = ViewModelProviders.of(this).get(ResultViewModel.class);
+        ResultViewModel resultViewModel = getViewModel(ResultViewModel.class);
 
-        // 子モード
-        HaikuSubmitViewModel haikuSubmitViewModel = ViewModelProviders.of(this).get(HaikuSubmitViewModel.class);
+        HaikuSubmitViewModel haikuSubmitViewModel = getViewModel(HaikuSubmitViewModel.class);
         haikuSubmitViewModel.getOnSubmitButtonClick().observe
                 (this, event -> launchFragment(QRShowFragment.newInstance(event.getContentIfNotHandled())));
-
-        QRShowViewModel qrShowViewModel = ViewModelProviders.of(this).get(QRShowViewModel.class);
     }
 
     private void launchFragment(Fragment fragment) {
@@ -68,5 +63,9 @@ public class MainActivity extends AppCompatActivity {
                 .beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.container, fragment).commit();
+    }
+
+    private <T extends ViewModel> T getViewModel(Class<T> viewModelClass) {
+        return ViewModelUtils.provideViewModel(this, viewModelClass);
     }
 }

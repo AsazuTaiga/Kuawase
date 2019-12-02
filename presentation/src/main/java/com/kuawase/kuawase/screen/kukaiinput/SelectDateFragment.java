@@ -1,4 +1,4 @@
-package com.kuawase.kuawase.utility;
+package com.kuawase.kuawase.screen.kukaiinput;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -18,7 +18,7 @@ import java.util.Objects;
 
 public class SelectDateFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
-
+    // TODO: TextViewを内部で抱え込まないようにしたい
     @Nullable
     private TextView textView = null;
 

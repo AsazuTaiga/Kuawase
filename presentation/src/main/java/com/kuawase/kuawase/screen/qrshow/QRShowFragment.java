@@ -9,31 +9,22 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.kuawase.kuawase.R;
+import com.kuawase.kuawase.utility.ViewModelUtils;
 
 import java.util.Objects;
 
 public class QRShowFragment extends Fragment {
+    private static final String KEY = "content";
+
     @Nullable
     private QRShowViewModel viewModel;
 
     @Nullable
     private ImageView qrCodeImage;
 
-    private int qrCodeImageWidth;
-
-    private int qrCodeImageHeight;
-
-    public static QRShowFragment newInstance(@Nullable String content) {
-        Objects.requireNonNull(content);
-        QRShowFragment fragment = new QRShowFragment();
-        Bundle args = new Bundle();
-        args.putString("content", content);
-        fragment.setArguments(args);
-        return fragment;
+    private QRShowFragment() {
     }
 
     @Override
@@ -48,15 +39,21 @@ public class QRShowFragment extends Fragment {
         qrCodeImage = view.findViewById(R.id.qr_code_image);
     }
 
+    public static QRShowFragment newInstance(@Nullable String content) {
+        Objects.requireNonNull(content);
+        QRShowFragment fragment = new QRShowFragment();
+        Bundle args = new Bundle();
+        args.putString(KEY, content);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        FragmentActivity parentActivity = getActivity();
-        Objects.requireNonNull(parentActivity);
-        viewModel = ViewModelProviders.of(parentActivity).get(QRShowViewModel.class);
-
+        viewModel = ViewModelUtils.provideViewModel(Objects.requireNonNull(getActivity()), QRShowViewModel.class);
         Bundle args = Objects.requireNonNull(getArguments());
-        String content = args.getString("content");
+        String content = args.getString(KEY);
         Objects.requireNonNull(viewModel);
         Objects.requireNonNull(qrCodeImage);
         Objects.requireNonNull(content);

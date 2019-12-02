@@ -14,7 +14,6 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 import java.util.EnumMap;
 import java.util.Map;
 
-import static com.google.zxing.common.StringUtils.SHIFT_JIS;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class QRShowViewModel extends ViewModel {

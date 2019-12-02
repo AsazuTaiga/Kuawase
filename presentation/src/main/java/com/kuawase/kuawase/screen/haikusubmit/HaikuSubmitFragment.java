@@ -10,15 +10,13 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.kuawase.kuawase.R;
+import com.kuawase.kuawase.utility.ViewModelUtils;
 
 import java.util.Objects;
 
 public class HaikuSubmitFragment extends Fragment {
-
     @Nullable
     private HaikuSubmitViewModel viewModel;
 
@@ -50,13 +48,13 @@ public class HaikuSubmitFragment extends Fragment {
         submitButton = view.findViewById(R.id.submit_button);
     }
 
+    private HaikuSubmitFragment() {
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        final FragmentActivity parentActivity = getActivity();
-        Objects.requireNonNull(parentActivity);
-        viewModel = ViewModelProviders.of(parentActivity).get(HaikuSubmitViewModel.class);
-
+        viewModel = ViewModelUtils.provideViewModel(Objects.requireNonNull(getActivity()), HaikuSubmitViewModel.class);
         Objects.requireNonNull(haikuEdit);
         Objects.requireNonNull(authorEdit);
         Objects.requireNonNull(submitButton);

@@ -9,15 +9,13 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.kuawase.kuawase.R;
+import com.kuawase.kuawase.utility.ViewModelUtils;
 
 import java.util.Objects;
 
 public class ModeChoiceFragment extends Fragment {
-
     @Nullable
     private ModeChoiceViewModel viewModel;
 
@@ -45,12 +43,13 @@ public class ModeChoiceFragment extends Fragment {
         childButton = view.findViewById(R.id.child_button);
     }
 
+    private ModeChoiceFragment() {
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        FragmentActivity parentActivity = getActivity();
-        Objects.requireNonNull(parentActivity);
-        viewModel = ViewModelProviders.of(parentActivity).get(ModeChoiceViewModel.class);
+        viewModel = ViewModelUtils.provideViewModel(Objects.requireNonNull(getActivity()), ModeChoiceViewModel.class);
 
         Objects.requireNonNull(parentButton);
         Objects.requireNonNull(childButton);

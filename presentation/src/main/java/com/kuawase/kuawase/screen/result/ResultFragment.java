@@ -1,25 +1,24 @@
 package com.kuawase.kuawase.screen.result;
 
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.kuawase.kuawase.R;
+import com.kuawase.kuawase.utility.ViewModelUtils;
+
+import java.util.Objects;
 
 public class ResultFragment extends Fragment {
-
+    @Nullable
     private ResultViewModel mViewModel;
 
-    public static ResultFragment newInstance() {
-        return new ResultFragment();
+    private ResultFragment() {
     }
 
     @Override
@@ -28,11 +27,15 @@ public class ResultFragment extends Fragment {
         return inflater.inflate(R.layout.result_fragment, container, false);
     }
 
+    @NonNull
+    public static ResultFragment newInstance() {
+        return new ResultFragment();
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(ResultViewModel.class);
+        mViewModel = ViewModelUtils.provideViewModel(Objects.requireNonNull(getActivity()), ResultViewModel.class);
         // TODO: Use the ViewModel
     }
-
 }
