@@ -1,5 +1,7 @@
 package com.kuawase.kuawase.screen.qrread;
 
+import android.text.TextUtils;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
@@ -14,8 +16,13 @@ import com.kuawase.model.KukaiInfoRepository;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class QRReadViewModel extends ViewModel {
+    private static final String PATTERN = "^.*;.*$";
+    private static final String SPLITTER = ";";
+    private static final String ERROR_MESSAGE = "不正なパターンです";
+
     @NonNull
     private KukaiInfoDataSource dataSource = KukaiInfoRepository.getInstance();
 
@@ -39,7 +46,7 @@ public class QRReadViewModel extends ViewModel {
         onFinishReadButtonClick.setValue(new Event<>(kukaiId));
     }
 
-    void onReadQRCode(@NonNull String haikuInfoString) {
+    void onReadQRCode(@NonNull String haikuInfoString) throws RuntimeException {
         if (null == kukaiInfo) {
             kukaiInfo = dataSource.getKukaiInfo();
         }
@@ -48,7 +55,11 @@ public class QRReadViewModel extends ViewModel {
             haikuInfos = kukaiInfo.getHaikuInfos();
         }
         Objects.requireNonNull(haikuInfos);
-        String[] haikuInfoStringArray = haikuInfoString.split(";");
+
+        if (!Pattern.matches(PATTERN, haikuInfoString)) {
+            throw new RuntimeException(ERROR_MESSAGE);
+        }
+        String[] haikuInfoStringArray = TextUtils.split(haikuInfoString, SPLITTER);
         haikuInfos.add(new HaikuInfo(haikuInfoStringArray[0], haikuInfoStringArray[1]));
     }
 

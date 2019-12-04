@@ -3,4 +3,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <!--テキスト色-->
+    <color name="text_default">#202020</color>
+    <color name="text_alert">#E02B2B</color>
 </resources>

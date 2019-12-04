@@ -7,11 +7,6 @@
     android:orientation="vertical"
     tools:context=".screen.qrread.QRReadFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="読み取り中..." />
-
     <com.journeyapps.barcodescanner.CompoundBarcodeView
         android:id="@+id/zxing_barcode_scanner"
         android:layout_width="match_parent"
@@ -25,9 +20,15 @@
         android:layout_height="wrap_content" />
 
     <Button
+        android:id="@+id/scan_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/scan" />
+
+    <Button
         android:id="@+id/finish_read_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="読み取り完了！" />
+        android:text="@string/finish_scanning" />
 
 </LinearLayout>

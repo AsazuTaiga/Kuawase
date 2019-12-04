@@ -22,7 +22,8 @@ public class ResultFragment extends Fragment {
     }
 
     @NonNull
-    public static ResultFragment newInstance() {
+    public static ResultFragment newInstance(@Nullable Integer kukaiId) {
+        Objects.requireNonNull(kukaiId);
         return new ResultFragment();
     }
 

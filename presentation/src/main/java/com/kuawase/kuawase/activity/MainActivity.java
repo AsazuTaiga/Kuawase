@@ -18,7 +18,7 @@ import com.kuawase.kuawase.screen.modechoice.ModeChoiceViewModel;
 import com.kuawase.kuawase.screen.qrread.QRReadFragment;
 import com.kuawase.kuawase.screen.qrread.QRReadViewModel;
 import com.kuawase.kuawase.screen.qrshow.QRShowFragment;
-import com.kuawase.kuawase.screen.result.ResultViewModel;
+import com.kuawase.kuawase.screen.result.ResultFragment;
 import com.kuawase.kuawase.utility.ViewModelUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
                 (this, event -> launchFragment(HaikuListFragment.newInstance(event.getContentIfNotHandled())));
 
         HaikuListViewModel haikuListViewModel = getViewModel(HaikuListViewModel.class);
-
-        ResultViewModel resultViewModel = getViewModel(ResultViewModel.class);
+        haikuListViewModel.getOnFinishInputButtonClick().observe
+                (this, event -> launchFragment(ResultFragment.newInstance(event.getContentIfNotHandled())));
 
         HaikuSubmitViewModel haikuSubmitViewModel = getViewModel(HaikuSubmitViewModel.class);
         haikuSubmitViewModel.getOnSubmitButtonClick().observe

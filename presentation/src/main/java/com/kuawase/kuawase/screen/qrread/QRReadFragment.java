@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.zxing.ResultPoint;
 import com.journeyapps.barcodescanner.BarcodeCallback;
@@ -22,8 +24,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class QRReadFragment extends Fragment {
+    @NonNull
     private static final String KEY = "kukaiId";
-    private static final String SEPARATOR = ";";
 
     @Nullable
     private QRReadViewModel viewModel;
@@ -33,6 +35,9 @@ public class QRReadFragment extends Fragment {
 
     @Nullable
     private TextView resultText;
+
+    @Nullable
+    private Button scanButton;
 
     @Nullable
     private Button finishReadButton;
@@ -61,6 +66,7 @@ public class QRReadFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         barcodeScanner = view.findViewById(R.id.zxing_barcode_scanner);
         resultText = view.findViewById(R.id.result_text);
+        scanButton = view.findViewById(R.id.scan_button);
         finishReadButton = view.findViewById(R.id.finish_read_button);
     }
 
@@ -81,7 +87,8 @@ public class QRReadFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = ViewModelUtils.provideViewModel(Objects.requireNonNull(getActivity()), QRReadViewModel.class);
+        FragmentActivity parentActivity = Objects.requireNonNull(getActivity());
+        viewModel = ViewModelUtils.provideViewModel(parentActivity, QRReadViewModel.class);
 
         Bundle args = getArguments();
         Objects.requireNonNull(args);
@@ -90,17 +97,25 @@ public class QRReadFragment extends Fragment {
 
         Objects.requireNonNull(barcodeScanner);
         Objects.requireNonNull(resultText);
-        barcodeScanner.decodeContinuous(new BarcodeCallback() {
+        Objects.requireNonNull(scanButton);
+        scanButton.setOnClickListener(l -> barcodeScanner.decodeSingle(new BarcodeCallback() {
             @Override
             public void barcodeResult(BarcodeResult result) {
-                viewModel.onReadQRCode(result.getText());
-                resultText.setText(result.getText().split(SEPARATOR)[0]);
+                String resultString = result.getText();
+                try {
+                    viewModel.onReadQRCode(resultString);
+                    resultText.setTextColor(ContextCompat.getColor(parentActivity, R.color.text_default));
+                    resultText.setText("読み取りました");
+                } catch (RuntimeException e) {
+                    resultText.setTextColor(ContextCompat.getColor(parentActivity, R.color.text_alert));
+                    resultText.setText(e.getMessage());
+                }
             }
 
             @Override
             public void possibleResultPoints(List<ResultPoint> resultPoints) {
             }
-        });
+        }));
 
         Objects.requireNonNull(finishReadButton);
         finishReadButton.setOnClickListener(l -> viewModel.onFinishReadButtonClick());

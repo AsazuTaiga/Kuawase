@@ -4,10 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.kuawase.kuawase.R;
 import com.kuawase.kuawase.utility.ViewModelUtils;
@@ -21,6 +24,12 @@ public class HaikuListFragment extends Fragment {
     @Nullable
     private HaikuListViewModel viewModel;
 
+    @Nullable
+    private ListView haikuList;
+
+    @Nullable
+    private Button finishVoteButton;
+
     private HaikuListFragment() {
     }
 
@@ -29,7 +38,7 @@ public class HaikuListFragment extends Fragment {
         HaikuListFragment fragment = new HaikuListFragment();
         Bundle args = new Bundle();
         args.putInt(KEY, kukaiId);
-        return new HaikuListFragment();
+        return fragment;
     }
 
     @Override
@@ -39,8 +48,25 @@ public class HaikuListFragment extends Fragment {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        haikuList = view.findViewById(R.id.haiku_list);
+        finishVoteButton = view.findViewById(R.id.finish_vote_button);
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = ViewModelUtils.provideViewModel(Objects.requireNonNull(getActivity()), HaikuListViewModel.class);
+        FragmentActivity parentActivity = Objects.requireNonNull(getActivity());
+        viewModel = ViewModelUtils.provideViewModel(parentActivity, HaikuListViewModel.class);
+
+        Bundle args = new Bundle();
+        viewModel.setKukaiId(args.getInt(KEY));
+
+        Objects.requireNonNull(haikuList);
+        haikuList.setAdapter(new HaikuListAdapter(parentActivity, viewModel.getKukaiInfo().getHaikuInfos()));
+
+        Objects.requireNonNull(finishVoteButton);
+        finishVoteButton.setOnClickListener(l -> viewModel.onFinishVoteButtonClick());
     }
 }

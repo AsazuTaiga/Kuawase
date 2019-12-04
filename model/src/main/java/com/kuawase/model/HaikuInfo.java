@@ -30,7 +30,7 @@ public class HaikuInfo {
         return point;
     }
 
-    void setPoint(int point) {
+    public void setPoint(int point) {
         this.point = point;
     }
 }
