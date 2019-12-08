@@ -1,5 +1,6 @@
 package com.kuawase.kuawase.activity;
 
+import android.media.SoundPool;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import com.kuawase.kuawase.screen.qrread.QRReadFragment;
 import com.kuawase.kuawase.screen.qrread.QRReadViewModel;
 import com.kuawase.kuawase.screen.qrshow.QRShowFragment;
 import com.kuawase.kuawase.screen.result.ResultFragment;
+import com.kuawase.kuawase.screen.result.ResultViewModel;
 import com.kuawase.kuawase.utility.ViewModelUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -56,6 +58,14 @@ public class MainActivity extends AppCompatActivity {
         HaikuSubmitViewModel haikuSubmitViewModel = getViewModel(HaikuSubmitViewModel.class);
         haikuSubmitViewModel.getOnSubmitButtonClick().observe
                 (this, event -> launchFragment(QRShowFragment.newInstance(event.getContentIfNotHandled())));
+
+        ResultViewModel resultViewModel = getViewModel(ResultViewModel.class);
+        resultViewModel.getOnExitButtonClick().observe
+                (this, event -> launchFragment(ModeChoiceFragment.newInstance()));
+    }
+
+    private <T extends ViewModel> T getViewModel(Class<T> viewModelClass) {
+        return ViewModelUtils.provideViewModel(this, viewModelClass);
     }
 
     private void launchFragment(Fragment fragment) {
@@ -63,9 +73,23 @@ public class MainActivity extends AppCompatActivity {
                 .beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.container, fragment).commit();
+
+        if (ResultFragment.class == fragment.getClass()) {
+            playResultSounde();
+        }
     }
 
-    private <T extends ViewModel> T getViewModel(Class<T> viewModelClass) {
-        return ViewModelUtils.provideViewModel(this, viewModelClass);
+    private void playResultSounde() {
+        SoundPool.Builder builder = new SoundPool.Builder();
+        SoundPool soundPool = builder.build();
+        int soundId = soundPool.load(getApplicationContext(), R.raw.result_intro, 1);
+        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int i, int i1) {
+                if (0 == i1) {
+                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f);
+                }
+            }
+        });
     }
 }

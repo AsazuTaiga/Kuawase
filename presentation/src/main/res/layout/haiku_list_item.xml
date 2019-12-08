@@ -23,7 +23,7 @@
     <ImageButton
         android:id="@+id/up_button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/button_height"
         android:layout_weight="1"
         android:contentDescription="@string/increase"
         android:src="@android:drawable/arrow_up_float" />
@@ -37,7 +37,7 @@
     <ImageButton
         android:id="@+id/down_button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/button_height"
         android:layout_weight="1"
         android:contentDescription="@string/decrease"
         android:src="@android:drawable/arrow_down_float" />

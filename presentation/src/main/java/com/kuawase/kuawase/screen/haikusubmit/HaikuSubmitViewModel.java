@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModel;
 import com.kuawase.kuawase.utility.Event;
 
 public class HaikuSubmitViewModel extends ViewModel {
+    private static final String FORMAT = "%s;%s";
+
     @NonNull
     private final MutableLiveData<String> haiku = new MutableLiveData<>();
 
@@ -23,7 +25,7 @@ public class HaikuSubmitViewModel extends ViewModel {
     }
 
     void onSubmitButtonClick(@NonNull String haiku, @NonNull String author) {
-        final String content = haiku + ";" + author;
+        final String content = String.format(FORMAT, haiku, author);
         onSubmitButtonClick.setValue(new Event<>(content));
     }
 }

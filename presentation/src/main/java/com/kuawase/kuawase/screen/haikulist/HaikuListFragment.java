@@ -18,7 +18,6 @@ import com.kuawase.kuawase.utility.ViewModelUtils;
 import java.util.Objects;
 
 public class HaikuListFragment extends Fragment {
-    @NonNull
     private static final String KEY = "kukaiId";
 
     @Nullable
@@ -64,7 +63,7 @@ public class HaikuListFragment extends Fragment {
         viewModel.setKukaiId(args.getInt(KEY));
 
         Objects.requireNonNull(haikuList);
-        haikuList.setAdapter(new HaikuListAdapter(parentActivity, viewModel.getKukaiInfo().getHaikuInfos()));
+        haikuList.setAdapter(new HaikuListAdapter(parentActivity, viewModel.getRondomHaikuInfos()));
 
         Objects.requireNonNull(finishVoteButton);
         finishVoteButton.setOnClickListener(l -> viewModel.onFinishVoteButtonClick());

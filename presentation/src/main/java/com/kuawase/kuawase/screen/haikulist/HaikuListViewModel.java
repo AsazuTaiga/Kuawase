@@ -7,10 +7,13 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.kuawase.kuawase.utility.Event;
+import com.kuawase.model.HaikuInfo;
 import com.kuawase.model.KukaiInfo;
 import com.kuawase.model.KukaiInfoDataSource;
 import com.kuawase.model.KukaiInfoRepository;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 public class HaikuListViewModel extends ViewModel {
@@ -44,5 +47,12 @@ public class HaikuListViewModel extends ViewModel {
             kukaiInfo = Objects.requireNonNull(dataSource.getKukaiInfo());
         }
         return kukaiInfo;
+    }
+
+    @NonNull
+    List<HaikuInfo> getRondomHaikuInfos() {
+        List<HaikuInfo> haikuInfos = getKukaiInfo().getHaikuInfos();
+        Collections.shuffle(haikuInfos);
+        return haikuInfos;
     }
 }

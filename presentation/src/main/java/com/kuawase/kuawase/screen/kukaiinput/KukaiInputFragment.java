@@ -69,20 +69,6 @@ public class KukaiInputFragment extends Fragment {
         finishInputButton = view.findViewById(R.id.finish_input_button);
     }
 
-    @NonNull
-    private Date parse(@NonNull String string) {
-        String pattern = "yyyy年MM月dd日";
-        SimpleDateFormat sdf = new SimpleDateFormat(pattern, Locale.JAPAN);
-        Date date = new Date();
-        try {
-            date = sdf.parse(string);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        Objects.requireNonNull(date);
-        return date;
-    }
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -110,5 +96,19 @@ public class KukaiInputFragment extends Fragment {
         SelectDateFragment fragment = new SelectDateFragment();
         fragment.setTextView(dateText);
         return fragment;
+    }
+
+    @NonNull
+    private Date parse(@NonNull String string) {
+        String pattern = "yyyy年MM月dd日";
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern, Locale.JAPAN);
+        Date date = new Date();
+        try {
+            date = sdf.parse(string);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Objects.requireNonNull(date);
+        return date;
     }
 }

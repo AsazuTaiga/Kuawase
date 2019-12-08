@@ -5,11 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.TextSwitcher;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
@@ -34,7 +33,7 @@ public class QRReadFragment extends Fragment {
     private CompoundBarcodeView barcodeScanner;
 
     @Nullable
-    private TextView resultText;
+    private TextSwitcher resultText;
 
     @Nullable
     private Button scanButton;
@@ -98,24 +97,28 @@ public class QRReadFragment extends Fragment {
         Objects.requireNonNull(barcodeScanner);
         Objects.requireNonNull(resultText);
         Objects.requireNonNull(scanButton);
-        scanButton.setOnClickListener(l -> barcodeScanner.decodeSingle(new BarcodeCallback() {
-            @Override
-            public void barcodeResult(BarcodeResult result) {
-                String resultString = result.getText();
-                try {
-                    viewModel.onReadQRCode(resultString);
-                    resultText.setTextColor(ContextCompat.getColor(parentActivity, R.color.text_default));
-                    resultText.setText("読み取りました");
-                } catch (RuntimeException e) {
-                    resultText.setTextColor(ContextCompat.getColor(parentActivity, R.color.text_alert));
-                    resultText.setText(e.getMessage());
+        resultText.setInAnimation(parentActivity, android.R.anim.slide_in_left);
+        resultText.setOutAnimation(parentActivity, android.R.anim.slide_out_right);
+        scanButton.setOnClickListener(l -> {
+            String[] strings = getResources().getStringArray(R.array.barcode_read_info);
+            resultText.setText(strings[0]);
+            barcodeScanner.decodeSingle(new BarcodeCallback() {
+                @Override
+                public void barcodeResult(BarcodeResult result) {
+                    String resultString = result.getText();
+                    try {
+                        viewModel.onReadQRCode(resultString);
+                        resultText.setText(strings[1]);
+                    } catch (RuntimeException e) {
+                        resultText.setText(strings[2]);
+                    }
                 }
-            }
 
-            @Override
-            public void possibleResultPoints(List<ResultPoint> resultPoints) {
-            }
-        }));
+                @Override
+                public void possibleResultPoints(List<ResultPoint> resultPoints) {
+                }
+            });
+        });
 
         Objects.requireNonNull(finishReadButton);
         finishReadButton.setOnClickListener(l -> viewModel.onFinishReadButtonClick());

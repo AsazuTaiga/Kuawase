@@ -5,7 +5,7 @@
     <string name="author_hint">作者名を入力</string>
     <string name="submit">投句する</string>
     <string name="qr_code_description">投句情報のQRコード表示</string>
-    <string name="kukai_name_hint">句会名を入力</string>
+    <string name="kukai_name_hint">句会名を入力してください</string>
     <string name="date_format">%1$d年%2$d月%3$d日</string>
     <string name="increase">加点</string>
     <string name="decrease">減点</string>
@@ -13,4 +13,16 @@
     <string name="show_result">結果を表示</string>
     <string name="scan">読み取る</string>
     <string name="finish_scanning">読み取り完了！</string>
+    <string name="done_read">読み取りました</string>
+    <string name="result_announcement">結果発表</string>
+    <string name="exit">終了する</string>
+    <string name="parent_mode">親モード</string>
+    <string name="child_mode">子モード</string>
+    <string name="incorrect_patter">不正なパターンです</string>
+    <string name="reading">読み取り中…</string>
+    <string name="choose_start_date">開始日時を選択</string>
+    <string name="choose_end_date">終了日時を選択</string>
+    <string name="finish_input">入力完了</string>
+    <string name="start_date_caption">開始日：</string>
+    <string name="end_date_hint">終了日：</string>
 </resources>

@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="bottom"
+    android:padding="@dimen/default_padding"
     tools:context=".screen.qrread.QRReadFragment">
 
     <com.journeyapps.barcodescanner.CompoundBarcodeView
@@ -14,21 +16,43 @@
         app:zxing_framing_rect_height="300dp"
         app:zxing_framing_rect_width="300dp" />
 
-    <TextView
+    <TextSwitcher
         android:id="@+id/result_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="100dp">
 
-    <Button
-        android:id="@+id/scan_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/scan" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    <Button
-        android:id="@+id/finish_read_button"
-        android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </TextSwitcher>
+
+    <LinearLayout
+        style="?buttonBarStyle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/finish_scanning" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/scan_button"
+            style="?buttonBarPositiveButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height"
+            android:layout_weight="1"
+            android:text="@string/scan" />
+
+        <Button
+            android:id="@+id/finish_read_button"
+            style="?buttonBarNegativeButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:text="@string/finish_scanning" />
+
+    </LinearLayout>
 
 </LinearLayout>
