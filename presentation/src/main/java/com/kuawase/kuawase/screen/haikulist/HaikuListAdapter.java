@@ -60,19 +60,17 @@ public class HaikuListAdapter extends ArrayAdapter<HaikuInfo> {
 
         numberText.setText(String.valueOf(position + 1));
         haikuText.setText(haikuInfo.getHaiku());
-        pointText.setText(String.valueOf(haikuInfo.getPoint()));
+        pointText.setText(String.format(FORMAT, String.valueOf(haikuInfo.getPoint())));
         upButton.setOnClickListener(l -> {
-                    int point = haikuInfo.getPoint() + 1;
-                    haikuInfo.setPoint(point);
+            int point = haikuInfo.getPoint() + 1;
+            haikuInfo.setPoint(point);
             pointText.setText(String.format(FORMAT, String.valueOf(point)));
-                }
-        );
+        });
         downButton.setOnClickListener(l -> {
-                    int point = haikuInfo.getPoint() - 1;
-                    haikuInfo.setPoint(point);
-                    pointText.setText(String.valueOf(point));
-                }
-        );
+            int point = haikuInfo.getPoint() - 1;
+            haikuInfo.setPoint(point);
+            pointText.setText(String.format(FORMAT, String.valueOf(point)));
+        });
 
         return convertView;
     }

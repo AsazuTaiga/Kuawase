@@ -8,6 +8,7 @@
     tools:context=".screen.haikusubmit.HaikuSubmitFragment">
 
     <TextView
+        android:layout_marginTop="100dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:labelFor="@+id/haiku_edit"
@@ -15,8 +16,9 @@
 
     <EditText
         android:id="@+id/haiku_edit"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="32sp"
         android:inputType="textNoSuggestions"
         tools:ignore="Autofill" />
 
@@ -24,18 +26,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:labelFor="@id/author_edit"
+        android:layout_marginTop="100dp"
         android:text="@string/author_hint" />
 
     <EditText
         android:id="@+id/author_edit"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="32sp"
         android:inputType="textNoSuggestions"
         tools:ignore="Autofill" />
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
     <Button
         android:id="@+id/submit_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/button_height"
         android:text="@string/submit" />
 

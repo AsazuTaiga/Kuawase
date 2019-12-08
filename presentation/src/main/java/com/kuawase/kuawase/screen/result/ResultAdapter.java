@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class ResultAdapter extends ArrayAdapter<HaikuInfo> {
+    private static final String FORMAT = "%s点";
+
     @NonNull
     private List<HaikuInfo> haikuInfos;
 
@@ -61,13 +63,7 @@ public class ResultAdapter extends ArrayAdapter<HaikuInfo> {
 
         haikuText.setText(haikuInfo.getHaiku());
         authorText.setText(haikuInfo.getAuthor());
-        pointText.setText(String.valueOf(haikuInfo.getPoint()));
-
-        if (0 == position) {
-            convertView.setBackgroundColor(getContext()
-                    .getResources()
-                    .getColor(R.color.colorAccent, null));
-        }
+        pointText.setText(String.format(FORMAT, String.valueOf(haikuInfo.getPoint())));
 
         return convertView;
     }
