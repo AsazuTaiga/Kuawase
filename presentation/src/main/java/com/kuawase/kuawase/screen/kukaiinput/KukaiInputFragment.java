@@ -47,11 +47,13 @@ public class KukaiInputFragment extends Fragment {
     private KukaiInputFragment() {
     }
 
+    @NonNull
     public static KukaiInputFragment newInstance() {
         return new KukaiInputFragment();
     }
 
     @Override
+    @NonNull
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.kukai_input_fragment, container, false);

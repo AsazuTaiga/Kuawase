@@ -32,6 +32,7 @@ public class HaikuListFragment extends Fragment {
     private HaikuListFragment() {
     }
 
+    @NonNull
     public static HaikuListFragment newInstance(@Nullable Integer kukaiId) {
         Objects.requireNonNull(kukaiId);
         HaikuListFragment fragment = new HaikuListFragment();
@@ -41,6 +42,7 @@ public class HaikuListFragment extends Fragment {
     }
 
     @Override
+    @NonNull
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.haiku_list_fragment, container, false);

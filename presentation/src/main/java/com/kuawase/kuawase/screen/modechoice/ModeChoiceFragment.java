@@ -34,6 +34,7 @@ public class ModeChoiceFragment extends Fragment {
     }
 
     @Override
+    @NonNull
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.mode_choice_fragment, container, false);

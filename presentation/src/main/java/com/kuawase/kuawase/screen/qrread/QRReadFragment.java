@@ -55,6 +55,7 @@ public class QRReadFragment extends Fragment {
     }
 
     @Override
+    @NonNull
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.qr_read_fragment, container, false);

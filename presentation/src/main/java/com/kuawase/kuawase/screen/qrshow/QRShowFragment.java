@@ -27,6 +27,7 @@ public class QRShowFragment extends Fragment {
     private QRShowFragment() {
     }
 
+    @NonNull
     public static QRShowFragment newInstance(@Nullable String content) {
         Objects.requireNonNull(content);
         QRShowFragment fragment = new QRShowFragment();
@@ -37,6 +38,7 @@ public class QRShowFragment extends Fragment {
     }
 
     @Override
+    @NonNull
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.qr_show_fragment, container, false);
