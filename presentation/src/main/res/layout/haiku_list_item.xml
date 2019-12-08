@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="60dp"
+    android:gravity="center_vertical"
     android:orientation="horizontal">
 
     <TextView
@@ -22,24 +23,26 @@
 
     <ImageButton
         android:id="@+id/up_button"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/button_height"
-        android:layout_weight="1"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="2dp"
         android:contentDescription="@string/increase"
-        android:src="@android:drawable/arrow_up_float" />
+        android:background="@drawable/good" />
 
     <TextView
         android:id="@+id/point_text"
-        android:layout_width="0dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_margin="10dp"
+        android:gravity="end"
+        tools:text="30点" />
 
     <ImageButton
         android:id="@+id/down_button"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/button_height"
-        android:layout_weight="1"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="2dp"
         android:contentDescription="@string/decrease"
-        android:src="@android:drawable/arrow_down_float" />
+        android:background="@drawable/bad" />
 
 </LinearLayout>
