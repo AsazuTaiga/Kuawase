@@ -1,4 +1,4 @@
-# Kuawas
+# Kuawase
 
 ## 残課題事項
 
