@@ -1,12 +1,14 @@
 package com.kuawase.kuawase.screen.result;
 
+import androidx.annotation.NonNull;
+
 import com.kuawase.model.HaikuInfo;
 
 import java.util.Comparator;
 
 class PointComparator implements Comparator<HaikuInfo> {
     @Override
-    public int compare(HaikuInfo arg1, HaikuInfo arg2) {
+    public int compare(@NonNull HaikuInfo arg1, @NonNull HaikuInfo arg2) {
         if (arg1.getPoint() == arg2.getPoint()) {
             return 0;
         }

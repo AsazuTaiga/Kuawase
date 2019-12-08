@@ -3,6 +3,8 @@ package com.kuawase.kuawase.activity;
 import android.media.SoundPool;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
@@ -25,7 +27,7 @@ import com.kuawase.kuawase.utility.ViewModelUtils;
 
 public class MainActivity extends AppCompatActivity {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -64,31 +66,29 @@ public class MainActivity extends AppCompatActivity {
                 (this, event -> launchFragment(ModeChoiceFragment.newInstance()));
     }
 
-    private <T extends ViewModel> T getViewModel(Class<T> viewModelClass) {
+    @NonNull
+    private <T extends ViewModel> T getViewModel(@NonNull Class<T> viewModelClass) {
         return ViewModelUtils.provideViewModel(this, viewModelClass);
     }
 
-    private void launchFragment(Fragment fragment) {
+    private void launchFragment(@NonNull Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.container, fragment).commit();
 
         if (ResultFragment.class == fragment.getClass()) {
-            playResultSounde();
+            playResultSound();
         }
     }
 
-    private void playResultSounde() {
+    private void playResultSound() {
         SoundPool.Builder builder = new SoundPool.Builder();
         SoundPool soundPool = builder.build();
         int soundId = soundPool.load(getApplicationContext(), R.raw.result_intro, 1);
-        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
-            @Override
-            public void onLoadComplete(SoundPool soundPool, int i, int i1) {
-                if (0 == i1) {
-                    soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f);
-                }
+        soundPool.setOnLoadCompleteListener((soundPool1, sampleId, status) -> {
+            if (0 == status) { // ロード成功時
+                soundPool1.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f);
             }
         });
     }

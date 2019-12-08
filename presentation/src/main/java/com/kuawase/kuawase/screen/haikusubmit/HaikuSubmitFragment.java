@@ -32,11 +32,13 @@ public class HaikuSubmitFragment extends Fragment {
     private HaikuSubmitFragment() {
     }
 
+    @NonNull
     public static HaikuSubmitFragment newInstance() {
         return new HaikuSubmitFragment();
     }
 
     @Override
+    @NonNull
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.haiku_submit_fragment, container, false);

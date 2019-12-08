@@ -24,7 +24,7 @@ public class ResultAdapter extends ArrayAdapter<HaikuInfo> {
     @NonNull
     private LayoutInflater layoutInflater;
 
-    public ResultAdapter(@NonNull Context context, @NonNull List<HaikuInfo> haikuInfos) {
+    ResultAdapter(@NonNull Context context, @NonNull List<HaikuInfo> haikuInfos) {
         super(context, R.layout.result_item, haikuInfos);
         this.haikuInfos = haikuInfos;
         this.layoutInflater = (LayoutInflater) Objects.requireNonNull(context.getSystemService(Context.LAYOUT_INFLATER_SERVICE));
@@ -42,12 +42,12 @@ public class ResultAdapter extends ArrayAdapter<HaikuInfo> {
     }
 
     @Override
-    public void sort(Comparator<? super HaikuInfo> comparator) {
+    public void sort(@NonNull Comparator<? super HaikuInfo> comparator) {
         super.sort(comparator);
     }
 
-    @NonNull
     @Override
+    @NonNull
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (null == convertView) {
             convertView = layoutInflater.inflate(R.layout.result_item, parent, false);
