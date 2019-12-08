@@ -1,40 +1,34 @@
 package com.kuawase.model;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
-class KukaiInfo {
-    @NonNull
-    private UUID uuid;
+public class KukaiInfo {
+    private final int id = 0;
 
     @NonNull
-    private String name;
+    private final String name;
 
     @NonNull
-    private Date startDate;
+    private final Date startDate;
 
     @NonNull
-    private Date endDate;
+    private final Date endDate;
+
+    @NonNull
+    private final List<HaikuInfo> haikuInfos = new ArrayList<>();
 
     KukaiInfo(@NonNull String name, @NonNull Date startDate, @NonNull Date endDate) {
-        this(UUID.randomUUID(), name, startDate, endDate);
-    }
-
-    KukaiInfo(@NonNull UUID uuid, @NonNull String name, @NonNull Date startDate, @NonNull Date endDate) {
-        this.uuid = uuid;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    @NonNull
-    UUID getUuid() {
-        return uuid;
+    public int getId() {
+        return id;
     }
 
     @NonNull
@@ -50,5 +44,10 @@ class KukaiInfo {
     @NonNull
     public Date getEndDate() {
         return endDate;
+    }
+
+    @NonNull
+    public List<HaikuInfo> getHaikuInfos() {
+        return haikuInfos;
     }
 }

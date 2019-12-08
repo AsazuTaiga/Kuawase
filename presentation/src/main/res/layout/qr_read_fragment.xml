@@ -1,13 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen.QRRead.QRReadFragment">
+    android:orientation="vertical"
+    android:gravity="bottom"
+    android:padding="@dimen/default_padding"
+    tools:context=".screen.qrread.QRReadFragment">
 
-    <TextView
+    <com.journeyapps.barcodescanner.CompoundBarcodeView
+        android:id="@+id/zxing_barcode_scanner"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="400dp"
+        app:zxing_framing_rect_height="300dp"
+        app:zxing_framing_rect_width="300dp" />
 
-</FrameLayout>
+    <TextSwitcher
+        android:id="@+id/result_text"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </TextSwitcher>
+
+    <LinearLayout
+        style="?buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/scan_button"
+            style="?buttonBarPositiveButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height"
+            android:layout_weight="1"
+            android:text="@string/scan" />
+
+        <Button
+            android:id="@+id/finish_read_button"
+            style="?buttonBarNegativeButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:text="@string/finish_scanning" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,4 +1,4 @@
-package com.kuawase.kuawase.screen.result;
+package com.kuawase.kuawase.screen.haikulist;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,57 +17,55 @@ import com.kuawase.kuawase.utility.ViewModelUtils;
 
 import java.util.Objects;
 
-public class ResultFragment extends Fragment {
+public class HaikuListFragment extends Fragment {
     private static final String KEY = "kukaiId";
 
     @Nullable
-    private ListView resultList;
+    private HaikuListViewModel viewModel;
 
     @Nullable
-    private Button exitButton;
+    private ListView haikuList;
 
     @Nullable
-    private ResultViewModel viewModel;
+    private Button finishVoteButton;
 
-    private ResultFragment() {
+    private HaikuListFragment() {
     }
 
-    @NonNull
-    public static ResultFragment newInstance(@Nullable Integer kukaiId) {
+    public static HaikuListFragment newInstance(@Nullable Integer kukaiId) {
         Objects.requireNonNull(kukaiId);
+        HaikuListFragment fragment = new HaikuListFragment();
         Bundle args = new Bundle();
         args.putInt(KEY, kukaiId);
-        ResultFragment fragment = new ResultFragment();
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.result_fragment, container, false);
+        return inflater.inflate(R.layout.haiku_list_fragment, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        haikuList = view.findViewById(R.id.haiku_list);
+        finishVoteButton = view.findViewById(R.id.finish_vote_button);
         super.onViewCreated(view, savedInstanceState);
-        resultList = view.findViewById(R.id.result_list);
-        exitButton = view.findViewById(R.id.exit_button);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         FragmentActivity parentActivity = Objects.requireNonNull(getActivity());
-        viewModel = ViewModelUtils.provideViewModel(parentActivity, ResultViewModel.class);
+        viewModel = ViewModelUtils.provideViewModel(parentActivity, HaikuListViewModel.class);
 
-        Bundle args = Objects.requireNonNull(getArguments());
+        Bundle args = new Bundle();
         viewModel.setKukaiId(args.getInt(KEY));
 
-        Objects.requireNonNull(resultList);
-        resultList.setAdapter(new ResultAdapter(parentActivity, viewModel.getSortedHaikuInfos()));
+        Objects.requireNonNull(haikuList);
+        haikuList.setAdapter(new HaikuListAdapter(parentActivity, viewModel.getRondomHaikuInfos()));
 
-        Objects.requireNonNull(exitButton);
-        exitButton.setOnClickListener(l -> viewModel.onExitButtonClick());
+        Objects.requireNonNull(finishVoteButton);
+        finishVoteButton.setOnClickListener(l -> viewModel.onFinishVoteButtonClick());
     }
 }

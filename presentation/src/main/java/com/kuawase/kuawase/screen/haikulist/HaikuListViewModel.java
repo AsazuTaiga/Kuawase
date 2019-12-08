@@ -1,4 +1,4 @@
-package com.kuawase.kuawase.screen.result;
+package com.kuawase.kuawase.screen.haikulist;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,11 +13,10 @@ import com.kuawase.model.KukaiInfoDataSource;
 import com.kuawase.model.KukaiInfoRepository;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-public class ResultViewModel extends ViewModel {
+public class HaikuListViewModel extends ViewModel {
     @NonNull
     private KukaiInfoDataSource dataSource = KukaiInfoRepository.getInstance();
 
@@ -27,31 +26,33 @@ public class ResultViewModel extends ViewModel {
     private KukaiInfo kukaiInfo;
 
     @NonNull
-    private MutableLiveData<Event<Object>> onExitButtonClick = new MutableLiveData<>();
+    private MutableLiveData<Event<Integer>> onFinishVoteButtonClick = new MutableLiveData<>();
 
     @NonNull
-    public LiveData<Event<Object>> getOnExitButtonClick() {
-        return onExitButtonClick;
+    public LiveData<Event<Integer>> getOnFinishInputButtonClick() {
+        return onFinishVoteButtonClick;
     }
 
-    void onExitButtonClick() {
-        dataSource.deleteKukaiInfo();
-        onExitButtonClick.setValue(new Event<>(new Object()));
+    void onFinishVoteButtonClick() {
+        onFinishVoteButtonClick.setValue(new Event<>(kukaiId));
     }
 
     void setKukaiId(int kukaiId) {
         this.kukaiId = kukaiId;
-        if (null == kukaiInfo) {
-            kukaiInfo = Objects.requireNonNull(dataSource.getKukaiInfo());
-        }
     }
 
     @NonNull
-    List<HaikuInfo> getSortedHaikuInfos() {
-        Objects.requireNonNull(kukaiInfo);
-        Comparator<HaikuInfo> pointComparator = new PointComparator();
-        List<HaikuInfo> haikuInfos = kukaiInfo.getHaikuInfos();
-        Collections.sort(haikuInfos, pointComparator);
+    KukaiInfo getKukaiInfo() {
+        if (null == kukaiInfo) {
+            kukaiInfo = Objects.requireNonNull(dataSource.getKukaiInfo());
+        }
+        return kukaiInfo;
+    }
+
+    @NonNull
+    List<HaikuInfo> getRondomHaikuInfos() {
+        List<HaikuInfo> haikuInfos = getKukaiInfo().getHaikuInfos();
+        Collections.shuffle(haikuInfos);
         return haikuInfos;
     }
 }

@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#F4DCA5</color>
+    <color name="colorPrimaryDark">#39251D</color>
+    <color name="colorAccent">#D8B068</color>
+
+    <!--テキスト色-->
+    <color name="text_default">#5C606A</color>
+    <color name="text_alert">#DE7424</color>
+    <color name="tool_bar_text">#FBFAF7</color>
+
+    <!--背景色-->
+    <color name="background">#FBFAF7</color>
 </resources>

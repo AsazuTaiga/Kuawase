@@ -1,13 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen.kukaiInput.KukaiInputFragment">
+    android:orientation="vertical"
+    android:padding="@dimen/default_padding"
+    tools:context=".screen.kukaiinput.KukaiInputFragment">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:id="@+id/kukai_name_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/kukai_name_edit"
+        android:text="@string/kukai_name_hint" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/kukai_name_edit"
+        android:layout_width="match_parent"
+        android:layout_below="@id/kukai_name_hint"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:textSize="32sp"
+        tools:ignore="Autofill" />
+
+    <LinearLayout
+        android:id="@+id/start_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/kukai_name_edit"
+        android:layout_marginTop="80dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start_date_caption" />
+
+        <TextView
+            android:id="@+id/start_date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="32sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/start_date_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:layout_below="@id/start_date"
+        android:text="@string/choose_start_date" />
+
+    <LinearLayout
+        android:id="@+id/end_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/start_date_button"
+        android:layout_marginTop="80dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/end_date_hint" />
+
+        <TextView
+            android:id="@+id/end_date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="32sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/end_date_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:layout_below="@id/end_date"
+        android:text="@string/choose_end_date" />
+
+    <Button
+        android:id="@+id/finish_input_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:layout_alignParentBottom="true"
+        android:text="@string/finish_input" />
+
+</RelativeLayout>
