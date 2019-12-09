@@ -1,5 +1,10 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="default_padding">5dp</dimen>
+    <dimen name="default_padding">10dp</dimen>
     <dimen name="button_height">70dp</dimen>
+
+    <!--フォントサイズ-->
+    <dimen name="font_size_small">14sp</dimen>
+    <dimen name="font_size_normal">18sp</dimen>
+    <dimen name="font_size_big">22sp</dimen>
 </resources>

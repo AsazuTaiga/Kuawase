@@ -12,7 +12,7 @@
     <string name="pattern">^*;*$</string>
     <string name="show_result">結果を表示</string>
     <string name="scan">読み取る</string>
-    <string name="finish_scanning">読み取り完了！</string>
+    <string name="finish_scanning">投句終了</string>
     <string name="done_read">読み取りました</string>
     <string name="result_announcement">結果発表</string>
     <string name="exit">終了する</string>
@@ -20,10 +20,10 @@
     <string name="child_mode">子モード</string>
     <string name="incorrect_patter">不正なパターンです</string>
     <string name="reading">読み取り中…</string>
-    <string name="choose_start_date">開始日時を選択</string>
-    <string name="choose_end_date">終了日時を選択</string>
+    <string name="choose_start_date">開始日を選択する</string>
+    <string name="choose_end_date">終了日を選択する</string>
     <string name="finish_input">入力完了</string>
-    <string name="start_date_caption">開始日：</string>
-    <string name="end_date_hint">終了日：</string>
+    <string name="start_date_caption">開始日</string>
+    <string name="end_date_hint">終了日</string>
     <string name="qr_show_message">親機にQRコードを読み込ませてください。</string>
 </resources>

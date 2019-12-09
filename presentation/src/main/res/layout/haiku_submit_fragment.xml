@@ -18,8 +18,11 @@
         android:id="@+id/haiku_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="32sp"
+        android:layout_marginTop="20dp"
         android:inputType="textNoSuggestions"
+        android:background="@drawable/text_box"
+        android:textSize="@dimen/font_size_big"
+        tools:text="テキスト"
         tools:ignore="Autofill" />
 
     <TextView
@@ -33,8 +36,10 @@
         android:id="@+id/author_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="32sp"
+        android:layout_marginTop="20dp"
         android:inputType="textNoSuggestions"
+        android:background="@drawable/text_box"
+        android:textSize="@dimen/font_size_big"
         tools:ignore="Autofill" />
 
     <Space

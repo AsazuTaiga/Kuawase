@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="60dp"
@@ -8,41 +8,57 @@
 
     <TextView
         android:id="@+id/number_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center_horizontal"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/number_circle"
+        android:gravity="center"
+        android:textColor="@color/background"
+        android:textSize="@dimen/font_size_small"
         tools:text="0" />
 
     <TextView
         android:id="@+id/haiku_text"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
+        android:layout_alignBaseline="@id/number_text"
+        android:layout_marginStart="6dp"
+        android:layout_toEndOf="@id/number_text"
         android:layout_height="wrap_content"
-        android:layout_weight="6"
         tools:text="古池や蛙飛び込む水の音" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/up_button"
         android:layout_width="30dp"
+        android:layout_below="@id/number_text"
         android:layout_height="30dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginStart="6dp"
+        android:layout_toStartOf="@id/point_text"
+        android:background="@drawable/good_selector"
+        android:clickable="true"
         android:contentDescription="@string/increase"
-        android:background="@drawable/good" />
+        android:focusable="true" />
 
     <TextView
         android:id="@+id/point_text"
         android:layout_width="50dp"
+        android:layout_below="@id/number_text"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:gravity="end"
+        android:layout_marginTop="5dp"
+        android:layout_toStartOf="@id/down_button"
+        android:background="@drawable/text_box"
+        android:textSize="@dimen/font_size_small"
         tools:text="30点" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/down_button"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginTop="2dp"
+        android:layout_below="@id/number_text"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/bad_selector"
+        android:clickable="true"
         android:contentDescription="@string/decrease"
-        android:background="@drawable/bad" />
+        android:focusable="true" />
 
-</LinearLayout>
+</RelativeLayout>
