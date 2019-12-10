@@ -11,9 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.kuawase.kuawase.R;
+import com.kuawase.kuawase.utility.SoundPlayer;
 import com.kuawase.kuawase.utility.ViewModelUtils;
 
 import java.text.ParseException;
@@ -43,6 +45,9 @@ public class KukaiInputFragment extends Fragment {
 
     @Nullable
     private Button finishInputButton;
+
+    @Nullable
+    private SoundPlayer soundPlayer;
 
     private KukaiInputFragment() {
     }
@@ -74,23 +79,35 @@ public class KukaiInputFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = ViewModelUtils.provideViewModel(Objects.requireNonNull(getActivity()), KukaiInputViewModel.class);
+        FragmentActivity parentActivity = Objects.requireNonNull(getActivity());
+        viewModel = ViewModelUtils.provideViewModel(parentActivity, KukaiInputViewModel.class);
+        soundPlayer = SoundPlayer.newInstance(parentActivity);
+
         FragmentManager fragmentManager = Objects.requireNonNull(getFragmentManager());
         SelectDateFragment startDateFragment = getSelectDateFragment(Objects.requireNonNull(startDateText));
         SelectDateFragment endDateFragment = getSelectDateFragment(Objects.requireNonNull(endDateText));
 
         Objects.requireNonNull(startDateButton);
         Objects.requireNonNull(startDateText);
-        startDateButton.setOnClickListener(l -> startDateFragment.show(fragmentManager, null));
+        startDateButton.setOnClickListener(l -> {
+            soundPlayer.playTapSound();
+            startDateFragment.show(fragmentManager, null);
+        });
 
         Objects.requireNonNull(endDateButton);
         Objects.requireNonNull(endDateText);
-        endDateButton.setOnClickListener(l -> endDateFragment.show(fragmentManager, null));
+        endDateButton.setOnClickListener(l -> {
+            soundPlayer.playTapSound();
+            endDateFragment.show(fragmentManager, null);
+        });
 
         Objects.requireNonNull(kukaiNameEdit);
         Objects.requireNonNull(finishInputButton);
-        finishInputButton.setOnClickListener(l -> viewModel.onFinishInputButtonClick(kukaiNameEdit.getText().toString(),
-                parse(startDateText.getText().toString()), parse(endDateText.getText().toString())));
+        finishInputButton.setOnClickListener(l -> {
+            soundPlayer.playTapSound();
+            viewModel.onFinishInputButtonClick(kukaiNameEdit.getText().toString(),
+                    parse(startDateText.getText().toString()), parse(endDateText.getText().toString()));
+        });
     }
 
     @NonNull
