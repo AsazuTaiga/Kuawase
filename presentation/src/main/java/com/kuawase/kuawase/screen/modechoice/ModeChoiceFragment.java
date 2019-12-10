@@ -9,8 +9,10 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.kuawase.kuawase.R;
+import com.kuawase.kuawase.utility.SoundPlayer;
 import com.kuawase.kuawase.utility.ViewModelUtils;
 
 import java.util.Objects;
@@ -24,6 +26,9 @@ public class ModeChoiceFragment extends Fragment {
 
     @Nullable
     private Button childButton;
+
+    @Nullable
+    private SoundPlayer soundPlayer;
 
     private ModeChoiceFragment() {
     }
@@ -50,11 +55,19 @@ public class ModeChoiceFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = ViewModelUtils.provideViewModel(Objects.requireNonNull(getActivity()), ModeChoiceViewModel.class);
+        FragmentActivity parentActivity = Objects.requireNonNull(getActivity());
+        viewModel = ViewModelUtils.provideViewModel(parentActivity, ModeChoiceViewModel.class);
+        soundPlayer = SoundPlayer.newInstance(parentActivity);
 
         Objects.requireNonNull(parentButton);
         Objects.requireNonNull(childButton);
-        parentButton.setOnClickListener(l -> viewModel.onParentButtonClick());
-        childButton.setOnClickListener(l -> viewModel.onChildButtonClick());
+        parentButton.setOnClickListener(l -> {
+            soundPlayer.playTapSound();
+            viewModel.onParentButtonClick();
+        });
+        childButton.setOnClickListener(l -> {
+            soundPlayer.playTapSound();
+            viewModel.onChildButtonClick();
+        });
     }
 }

@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.kuawase.kuawase.R;
+import com.kuawase.kuawase.utility.SoundPlayer;
 import com.kuawase.kuawase.utility.ViewModelUtils;
 
 import java.util.Objects;
@@ -28,6 +29,9 @@ public class ResultFragment extends Fragment {
 
     @Nullable
     private ResultViewModel viewModel;
+
+    @Nullable
+    private SoundPlayer soundPlayer;
 
     private ResultFragment() {
     }
@@ -61,6 +65,7 @@ public class ResultFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         FragmentActivity parentActivity = Objects.requireNonNull(getActivity());
         viewModel = ViewModelUtils.provideViewModel(parentActivity, ResultViewModel.class);
+        soundPlayer = SoundPlayer.newInstance(parentActivity);
 
         Bundle args = Objects.requireNonNull(getArguments());
         viewModel.setKukaiId(args.getInt(KEY));
@@ -69,6 +74,9 @@ public class ResultFragment extends Fragment {
         resultList.setAdapter(new ResultAdapter(parentActivity, viewModel.getSortedHaikuInfos()));
 
         Objects.requireNonNull(exitButton);
-        exitButton.setOnClickListener(l -> viewModel.onExitButtonClick());
+        exitButton.setOnClickListener(l -> {
+            soundPlayer.playTapSound();
+            viewModel.onExitButtonClick();
+        });
     }
 }

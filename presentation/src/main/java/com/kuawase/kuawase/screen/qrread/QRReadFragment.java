@@ -17,6 +17,7 @@ import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.CompoundBarcodeView;
 import com.kuawase.kuawase.R;
+import com.kuawase.kuawase.utility.SoundPlayer;
 import com.kuawase.kuawase.utility.ViewModelUtils;
 
 import java.util.List;
@@ -40,6 +41,9 @@ public class QRReadFragment extends Fragment {
 
     @Nullable
     private Button finishReadButton;
+
+    @Nullable
+    private SoundPlayer soundPlayer;
 
     private QRReadFragment() {
     }
@@ -89,6 +93,7 @@ public class QRReadFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         FragmentActivity parentActivity = Objects.requireNonNull(getActivity());
         viewModel = ViewModelUtils.provideViewModel(parentActivity, QRReadViewModel.class);
+        soundPlayer = SoundPlayer.newInstance(parentActivity);
 
         Bundle args = getArguments();
         Objects.requireNonNull(args);
@@ -101,6 +106,7 @@ public class QRReadFragment extends Fragment {
         resultText.setInAnimation(parentActivity, android.R.anim.slide_in_left);
         resultText.setOutAnimation(parentActivity, android.R.anim.slide_out_right);
         scanButton.setOnClickListener(l -> {
+            soundPlayer.playTapSound();
             String[] strings = getResources().getStringArray(R.array.barcode_read_info);
             resultText.setText(strings[0]);
             barcodeScanner.decodeSingle(new BarcodeCallback() {
@@ -122,6 +128,9 @@ public class QRReadFragment extends Fragment {
         });
 
         Objects.requireNonNull(finishReadButton);
-        finishReadButton.setOnClickListener(l -> viewModel.onFinishReadButtonClick());
+        finishReadButton.setOnClickListener(l -> {
+            soundPlayer.playTapSound();
+            viewModel.onFinishReadButtonClick();
+        });
     }
 }

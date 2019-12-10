@@ -1,6 +1,5 @@
 package com.kuawase.kuawase.activity;
 
-import android.media.SoundPool;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,6 +22,7 @@ import com.kuawase.kuawase.screen.qrread.QRReadViewModel;
 import com.kuawase.kuawase.screen.qrshow.QRShowFragment;
 import com.kuawase.kuawase.screen.result.ResultFragment;
 import com.kuawase.kuawase.screen.result.ResultViewModel;
+import com.kuawase.kuawase.utility.SoundPlayer;
 import com.kuawase.kuawase.utility.ViewModelUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -66,6 +66,12 @@ public class MainActivity extends AppCompatActivity {
                 (this, event -> launchFragment(ModeChoiceFragment.newInstance()));
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SoundPlayer.newInstance(this).releasSoundPool();
+    }
+
     @NonNull
     private <T extends ViewModel> T getViewModel(@NonNull Class<T> viewModelClass) {
         return ViewModelUtils.provideViewModel(this, viewModelClass);
@@ -76,20 +82,5 @@ public class MainActivity extends AppCompatActivity {
                 .beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.container, fragment).commit();
-
-        if (ResultFragment.class == fragment.getClass()) {
-            playResultSound();
-        }
-    }
-
-    private void playResultSound() {
-        SoundPool.Builder builder = new SoundPool.Builder();
-        SoundPool soundPool = builder.build();
-        int soundId = soundPool.load(getApplicationContext(), R.raw.result_intro, 1);
-        soundPool.setOnLoadCompleteListener((soundPool1, sampleId, status) -> {
-            if (0 == status) { // ロード成功時
-                soundPool1.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f);
-            }
-        });
     }
 }
