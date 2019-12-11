@@ -85,20 +85,28 @@ public class KukaiInputFragment extends Fragment {
 
         FragmentManager fragmentManager = Objects.requireNonNull(getFragmentManager());
         SelectDateFragment startDateFragment = getSelectDateFragment(Objects.requireNonNull(startDateText));
+        startDateFragment.setOnDismissListner(l -> viewModel.setShowingDateFragment(false));
         SelectDateFragment endDateFragment = getSelectDateFragment(Objects.requireNonNull(endDateText));
+        endDateFragment.setOnDismissListner(l -> viewModel.setShowingDateFragment(false));
 
         Objects.requireNonNull(startDateButton);
         Objects.requireNonNull(startDateText);
         startDateButton.setOnClickListener(l -> {
             soundPlayer.playTapSound();
-            startDateFragment.show(fragmentManager, null);
+            if (!viewModel.isShowingDateFragment()) {
+                startDateFragment.show(fragmentManager, null);
+                viewModel.setShowingDateFragment(true);
+            }
         });
 
         Objects.requireNonNull(endDateButton);
         Objects.requireNonNull(endDateText);
         endDateButton.setOnClickListener(l -> {
             soundPlayer.playTapSound();
-            endDateFragment.show(fragmentManager, null);
+            if (!viewModel.isShowingDateFragment()) {
+                endDateFragment.show(fragmentManager, null);
+                viewModel.setShowingDateFragment(true);
+            }
         });
 
         Objects.requireNonNull(kukaiNameEdit);

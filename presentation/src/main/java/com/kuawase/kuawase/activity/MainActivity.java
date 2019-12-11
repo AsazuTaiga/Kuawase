@@ -1,5 +1,6 @@
 package com.kuawase.kuawase.activity;
 
+import android.media.SoundPool;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,7 +23,6 @@ import com.kuawase.kuawase.screen.qrread.QRReadViewModel;
 import com.kuawase.kuawase.screen.qrshow.QRShowFragment;
 import com.kuawase.kuawase.screen.result.ResultFragment;
 import com.kuawase.kuawase.screen.result.ResultViewModel;
-import com.kuawase.kuawase.utility.SoundPlayer;
 import com.kuawase.kuawase.utility.ViewModelUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,36 +40,55 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         ModeChoiceViewModel modeChoiceViewModel = getViewModel(ModeChoiceViewModel.class);
-        modeChoiceViewModel.getOnParentButtonClick().observe
-                (this, event -> launchFragment(KukaiInputFragment.newInstance()));
-        modeChoiceViewModel.getOnChildButtonClick().observe
-                (this, event -> launchFragment(HaikuSubmitFragment.newInstance()));
+        modeChoiceViewModel.getOnParentButtonClick().observe(this, event -> {
+            if (null != event.getContentIfNotHandled()) {
+                launchFragment(KukaiInputFragment.newInstance());
+            }
+        });
+        modeChoiceViewModel.getOnChildButtonClick().observe(this, event -> {
+            if (null != event.getContentIfNotHandled()) {
+                launchFragment(HaikuSubmitFragment.newInstance());
+            }
+        });
 
         KukaiInputViewModel kukaiInputViewModel = getViewModel(KukaiInputViewModel.class);
-        kukaiInputViewModel.getOnFinishInputButtonClick().observe
-                (this, event -> launchFragment(QRReadFragment.newInstance(event.getContentIfNotHandled())));
+        kukaiInputViewModel.getOnFinishInputButtonClick().observe(this, event -> {
+            Integer kukaiId = event.getContentIfNotHandled();
+            if (null != kukaiId) {
+                launchFragment(QRReadFragment.newInstance(kukaiId));
+            }
+        });
 
         QRReadViewModel qrReadViewModel = getViewModel(QRReadViewModel.class);
-        qrReadViewModel.getOnFinishReadButtonClick().observe
-                (this, event -> launchFragment(HaikuListFragment.newInstance(event.getContentIfNotHandled())));
+        qrReadViewModel.getOnFinishReadButtonClick().observe(this, event -> {
+            Integer kukaiId = event.getContentIfNotHandled();
+            if (null != kukaiId) {
+                launchFragment(HaikuListFragment.newInstance(kukaiId));
+            }
+        });
 
         HaikuListViewModel haikuListViewModel = getViewModel(HaikuListViewModel.class);
-        haikuListViewModel.getOnFinishInputButtonClick().observe
-                (this, event -> launchFragment(ResultFragment.newInstance(event.getContentIfNotHandled())));
-
-        HaikuSubmitViewModel haikuSubmitViewModel = getViewModel(HaikuSubmitViewModel.class);
-        haikuSubmitViewModel.getOnSubmitButtonClick().observe
-                (this, event -> launchFragment(QRShowFragment.newInstance(event.getContentIfNotHandled())));
+        haikuListViewModel.getOnFinishInputButtonClick().observe(this, event -> {
+            Integer kukaiId = event.getContentIfNotHandled();
+            if (null != kukaiId) {
+                launchFragment(ResultFragment.newInstance(kukaiId));
+            }
+        });
 
         ResultViewModel resultViewModel = getViewModel(ResultViewModel.class);
-        resultViewModel.getOnExitButtonClick().observe
-                (this, event -> launchFragment(ModeChoiceFragment.newInstance()));
-    }
+        resultViewModel.getOnExitButtonClick().observe(this, event -> {
+            if (null != event.getContentIfNotHandled()) {
+                launchFragment(ModeChoiceFragment.newInstance());
+            }
+        });
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        SoundPlayer.newInstance(this).releasSoundPool();
+        HaikuSubmitViewModel haikuSubmitViewModel = getViewModel(HaikuSubmitViewModel.class);
+        haikuSubmitViewModel.getOnSubmitButtonClick().observe(this, event -> {
+            String content = event.getContentIfNotHandled();
+            if (null != content) {
+                launchFragment(QRShowFragment.newInstance(content));
+            }
+        });
     }
 
     @NonNull

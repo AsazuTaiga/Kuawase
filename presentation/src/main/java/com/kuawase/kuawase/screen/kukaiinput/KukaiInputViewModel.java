@@ -13,6 +13,8 @@ import com.kuawase.model.KukaiInfoRepository;
 import java.util.Date;
 
 public class KukaiInputViewModel extends ViewModel {
+    private boolean isShowingDateFragment = false;
+
     @NonNull
     private final KukaiInfoDataSource dataSource = KukaiInfoRepository.getInstance();
 
@@ -27,5 +29,13 @@ public class KukaiInputViewModel extends ViewModel {
     void onFinishInputButtonClick(@NonNull String kukaiName, @NonNull Date startDate, @NonNull Date endDate) {
         KukaiInfo kukaiInfo = dataSource.createKukaiInfo(kukaiName, startDate, endDate);
         onFinishInputButtonClick.setValue(new Event<>(kukaiInfo.getId()));
+    }
+
+    public boolean isShowingDateFragment() {
+        return isShowingDateFragment;
+    }
+
+    public void setShowingDateFragment(boolean showingDateFragment) {
+        isShowingDateFragment = showingDateFragment;
     }
 }

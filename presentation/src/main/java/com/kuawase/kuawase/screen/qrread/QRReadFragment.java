@@ -49,8 +49,7 @@ public class QRReadFragment extends Fragment {
     }
 
     @NonNull
-    public static QRReadFragment newInstance(@Nullable Integer kukaiId) {
-        Objects.requireNonNull(kukaiId);
+    public static QRReadFragment newInstance(@NonNull Integer kukaiId) {
         QRReadFragment fragment = new QRReadFragment();
         Bundle args = new Bundle();
         args.putInt(KEY, kukaiId);
@@ -115,6 +114,7 @@ public class QRReadFragment extends Fragment {
                     String resultString = result.getText();
                     try {
                         viewModel.onReadQRCode(resultString);
+                        soundPlayer.playFinishReadSound();
                         resultText.setText(strings[1]);
                     } catch (RuntimeException e) {
                         resultText.setText(strings[2]);

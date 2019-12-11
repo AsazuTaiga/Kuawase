@@ -37,8 +37,7 @@ public class HaikuListFragment extends Fragment {
     }
 
     @NonNull
-    public static HaikuListFragment newInstance(@Nullable Integer kukaiId) {
-        Objects.requireNonNull(kukaiId);
+    public static HaikuListFragment newInstance(@NonNull Integer kukaiId) {
         HaikuListFragment fragment = new HaikuListFragment();
         Bundle args = new Bundle();
         args.putInt(KEY, kukaiId);

@@ -8,6 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textSize">@dimen/font_size_normal</item>
         <item name="android:textColor">@color/text_default</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:fragmentEnterTransition">@android:transition/fade</item>
+        <item name="android:fragmentExitTransition">@android:transition/fade</item>
     </style>
 
     <style name="default_font_style">

@@ -37,8 +37,7 @@ public class ResultFragment extends Fragment {
     }
 
     @NonNull
-    public static ResultFragment newInstance(@Nullable Integer kukaiId) {
-        Objects.requireNonNull(kukaiId);
+    public static ResultFragment newInstance(@NonNull Integer kukaiId) {
         Bundle args = new Bundle();
         args.putInt(KEY, kukaiId);
         ResultFragment fragment = new ResultFragment();
