@@ -1,6 +1,5 @@
 package com.kuawase.kuawase.activity;
 
-import android.media.SoundPool;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,6 +22,7 @@ import com.kuawase.kuawase.screen.qrread.QRReadViewModel;
 import com.kuawase.kuawase.screen.qrshow.QRShowFragment;
 import com.kuawase.kuawase.screen.result.ResultFragment;
 import com.kuawase.kuawase.screen.result.ResultViewModel;
+import com.kuawase.kuawase.utility.SoundPlayer;
 import com.kuawase.kuawase.utility.ViewModelUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,31 +39,54 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        // BGM再生
+        SoundPlayer player = new SoundPlayer(this);
+        player.playBgm1();
+
         ModeChoiceViewModel modeChoiceViewModel = getViewModel(ModeChoiceViewModel.class);
-        modeChoiceViewModel.getOnParentButtonClick().observe
-                (this, event -> launchFragment(KukaiInputFragment.newInstance()));
-        modeChoiceViewModel.getOnChildButtonClick().observe
-                (this, event -> launchFragment(HaikuSubmitFragment.newInstance()));
+        modeChoiceViewModel.getOnParentButtonClick().observe(this,
+                event -> commitFragment(KukaiInputFragment.newInstance()));
+        modeChoiceViewModel.getOnChildButtonClick().observe(this,
+                event -> commitFragment(HaikuSubmitFragment.newInstance()));
 
         KukaiInputViewModel kukaiInputViewModel = getViewModel(KukaiInputViewModel.class);
-        kukaiInputViewModel.getOnFinishInputButtonClick().observe
-                (this, event -> launchFragment(QRReadFragment.newInstance(event.getContentIfNotHandled())));
+        kukaiInputViewModel.getOnFinishInputButtonClick().observe(this, event -> {
+            Integer kukaiId = event.getContentIfNotHandled();
+            if (null != kukaiId) {
+                commitFragment(QRReadFragment.newInstance(kukaiId));
+            }
+        });
 
         QRReadViewModel qrReadViewModel = getViewModel(QRReadViewModel.class);
-        qrReadViewModel.getOnFinishReadButtonClick().observe
-                (this, event -> launchFragment(HaikuListFragment.newInstance(event.getContentIfNotHandled())));
+        qrReadViewModel.getOnFinishReadButtonClick().observe(this, event -> {
+            Integer kukaiId = event.getContentIfNotHandled();
+            if (null != kukaiId) {
+                commitFragment(HaikuListFragment.newInstance(kukaiId));
+            }
+        });
 
         HaikuListViewModel haikuListViewModel = getViewModel(HaikuListViewModel.class);
-        haikuListViewModel.getOnFinishInputButtonClick().observe
-                (this, event -> launchFragment(ResultFragment.newInstance(event.getContentIfNotHandled())));
-
-        HaikuSubmitViewModel haikuSubmitViewModel = getViewModel(HaikuSubmitViewModel.class);
-        haikuSubmitViewModel.getOnSubmitButtonClick().observe
-                (this, event -> launchFragment(QRShowFragment.newInstance(event.getContentIfNotHandled())));
+        haikuListViewModel.getOnFinishInputButtonClick().observe(this, event -> {
+            Integer kukaiId = event.getContentIfNotHandled();
+            if (null != kukaiId) {
+                player.stopBgm();
+                commitFragment(ResultFragment.newInstance(kukaiId));
+            }
+        });
 
         ResultViewModel resultViewModel = getViewModel(ResultViewModel.class);
-        resultViewModel.getOnExitButtonClick().observe
-                (this, event -> launchFragment(ModeChoiceFragment.newInstance()));
+        resultViewModel.getOnExitButtonClick().observe(this, event -> {
+            player.playBgm1();
+            commitFragment(ModeChoiceFragment.newInstance());
+        });
+
+        HaikuSubmitViewModel haikuSubmitViewModel = getViewModel(HaikuSubmitViewModel.class);
+        haikuSubmitViewModel.getOnSubmitButtonClick().observe(this, event -> {
+            String content = event.getContentIfNotHandled();
+            if (null != content) {
+                commitFragment(QRShowFragment.newInstance(content));
+            }
+        });
     }
 
     @NonNull
@@ -71,25 +94,10 @@ public class MainActivity extends AppCompatActivity {
         return ViewModelUtils.provideViewModel(this, viewModelClass);
     }
 
-    private void launchFragment(@NonNull Fragment fragment) {
+    private void commitFragment(@NonNull Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.container, fragment).commit();
-
-        if (ResultFragment.class == fragment.getClass()) {
-            playResultSound();
-        }
-    }
-
-    private void playResultSound() {
-        SoundPool.Builder builder = new SoundPool.Builder();
-        SoundPool soundPool = builder.build();
-        int soundId = soundPool.load(getApplicationContext(), R.raw.result_intro, 1);
-        soundPool.setOnLoadCompleteListener((soundPool1, sampleId, status) -> {
-            if (0 == status) { // ロード成功時
-                soundPool1.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f);
-            }
-        });
     }
 }

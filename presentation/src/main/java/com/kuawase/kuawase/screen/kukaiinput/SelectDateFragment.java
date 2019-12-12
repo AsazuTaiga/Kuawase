@@ -2,6 +2,7 @@ package com.kuawase.kuawase.screen.kukaiinput;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.DatePicker;
 import android.widget.TextView;
@@ -21,6 +22,9 @@ public class SelectDateFragment extends DialogFragment
     // TODO: TextViewを内部で抱え込まないようにしたい
     @Nullable
     private TextView textView = null;
+
+    @Nullable
+    private DialogInterface.OnDismissListener onDismissListener;
 
     public void setTextView(@NonNull TextView textView) {
         this.textView = textView;
@@ -45,5 +49,17 @@ public class SelectDateFragment extends DialogFragment
             return;
         }
         textView.setText(getResources().getString(R.string.date_format, yyyy, mm + 1, dd));
+    }
+
+    public void setOnDismissListner(DialogInterface.OnDismissListener l) {
+        onDismissListener = l;
+    }
+
+    @Override
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        super.onDismiss(dialog);
+        if (null != onDismissListener) {
+            onDismissListener.onDismiss(dialog);
+        }
     }
 }

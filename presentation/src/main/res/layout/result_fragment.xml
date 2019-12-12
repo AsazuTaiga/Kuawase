@@ -15,8 +15,8 @@
         android:gravity="center"
         android:padding="@dimen/default_padding"
         android:text="@string/result_announcement"
-        android:textColor="@color/colorAccent"
-        android:textSize="30sp" />
+        android:textColor="@color/text_bright"
+        android:textSize="@dimen/font_size_big" />
 
     <ListView
         android:id="@+id/result_list"

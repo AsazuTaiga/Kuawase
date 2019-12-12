@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.kuawase.kuawase.R;
+import com.kuawase.kuawase.utility.SoundPlayer;
 import com.kuawase.kuawase.utility.ViewModelUtils;
 
 import java.util.Objects;
@@ -29,12 +30,14 @@ public class HaikuListFragment extends Fragment {
     @Nullable
     private Button finishVoteButton;
 
+    @Nullable
+    private SoundPlayer soundPlayer;
+
     private HaikuListFragment() {
     }
 
     @NonNull
-    public static HaikuListFragment newInstance(@Nullable Integer kukaiId) {
-        Objects.requireNonNull(kukaiId);
+    public static HaikuListFragment newInstance(@NonNull Integer kukaiId) {
         HaikuListFragment fragment = new HaikuListFragment();
         Bundle args = new Bundle();
         args.putInt(KEY, kukaiId);
@@ -60,6 +63,7 @@ public class HaikuListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         FragmentActivity parentActivity = Objects.requireNonNull(getActivity());
         viewModel = ViewModelUtils.provideViewModel(parentActivity, HaikuListViewModel.class);
+        soundPlayer = new SoundPlayer(parentActivity);
 
         Bundle args = new Bundle();
         viewModel.setKukaiId(args.getInt(KEY));
@@ -68,6 +72,9 @@ public class HaikuListFragment extends Fragment {
         haikuList.setAdapter(new HaikuListAdapter(parentActivity, viewModel.getRondomHaikuInfos()));
 
         Objects.requireNonNull(finishVoteButton);
-        finishVoteButton.setOnClickListener(l -> viewModel.onFinishVoteButtonClick());
+        finishVoteButton.setOnClickListener(l -> {
+            soundPlayer.playResultSound();
+            viewModel.onFinishVoteButtonClick();
+        });
     }
 }

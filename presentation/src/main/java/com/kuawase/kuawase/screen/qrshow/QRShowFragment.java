@@ -28,8 +28,7 @@ public class QRShowFragment extends Fragment {
     }
 
     @NonNull
-    public static QRShowFragment newInstance(@Nullable String content) {
-        Objects.requireNonNull(content);
+    public static QRShowFragment newInstance(@NonNull String content) {
         QRShowFragment fragment = new QRShowFragment();
         Bundle args = new Bundle();
         args.putString(KEY, content);

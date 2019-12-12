@@ -6,6 +6,7 @@
 
     <!--テキスト色-->
     <color name="text_default">#5C606A</color>
+    <color name="text_bright">#FFFFFF</color>
     <color name="text_alert">#DE7424</color>
     <color name="tool_bar_text">#FBFAF7</color>
 

@@ -5,13 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.kuawase.kuawase.R;
+import com.kuawase.kuawase.utility.SoundPlayer;
 import com.kuawase.model.HaikuInfo;
 
 import java.util.List;
@@ -53,20 +54,24 @@ public class HaikuListAdapter extends ArrayAdapter<HaikuInfo> {
         TextView numberText = convertView.findViewById(R.id.number_text);
         TextView haikuText = convertView.findViewById(R.id.haiku_text);
         TextView pointText = convertView.findViewById(R.id.point_text);
-        ImageButton upButton = convertView.findViewById(R.id.up_button);
-        ImageButton downButton = convertView.findViewById(R.id.down_button);
+        ImageView upButton = convertView.findViewById(R.id.up_button);
+        ImageView downButton = convertView.findViewById(R.id.down_button);
 
         HaikuInfo haikuInfo = haikuInfos.get(position);
+        SoundPlayer player = new SoundPlayer(getContext());
 
         numberText.setText(String.valueOf(position + 1));
         haikuText.setText(haikuInfo.getHaiku());
         pointText.setText(String.format(FORMAT, String.valueOf(haikuInfo.getPoint())));
         upButton.setOnClickListener(l -> {
+            player.playTapSound();
             int point = haikuInfo.getPoint() + 1;
             haikuInfo.setPoint(point);
             pointText.setText(String.format(FORMAT, String.valueOf(point)));
+
         });
         downButton.setOnClickListener(l -> {
+            player.playTapSound();
             int point = haikuInfo.getPoint() - 1;
             haikuInfo.setPoint(point);
             pointText.setText(String.format(FORMAT, String.valueOf(point)));
