@@ -34,29 +34,14 @@ public class SoundPlayer {
     }
 
     public void playTapSound() {
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         playSound(tapSoundId);
     }
 
     public void playFinishReadSound() {
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         playSound(finishReadSoundId);
     }
 
     public void playResultSound() {
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         playSound(resultSoundId);
     }
 
