@@ -63,7 +63,7 @@ public class HaikuSubmitFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         FragmentActivity parentActivity = Objects.requireNonNull(getActivity());
         viewModel = ViewModelUtils.provideViewModel(parentActivity, HaikuSubmitViewModel.class);
-        soundPlayer = SoundPlayer.newInstance(parentActivity);
+        soundPlayer = new SoundPlayer(parentActivity);
 
         Objects.requireNonNull(haikuEdit);
         Objects.requireNonNull(authorEdit);

@@ -63,7 +63,7 @@ public class HaikuListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         FragmentActivity parentActivity = Objects.requireNonNull(getActivity());
         viewModel = ViewModelUtils.provideViewModel(parentActivity, HaikuListViewModel.class);
-        soundPlayer = SoundPlayer.newInstance(parentActivity);
+        soundPlayer = new SoundPlayer(parentActivity);
 
         Bundle args = new Bundle();
         viewModel.setKukaiId(args.getInt(KEY));

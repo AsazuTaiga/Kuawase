@@ -2,8 +2,10 @@
 <resources>
     <string-array name="barcode_read_info">
         <item name="reading">読み取り中…</item>
-        <item name="done_reading">読み取りました！（続けるには「読み取る」を押してください）</item>
-        <item name="incorrect_pattern">不正なパターンです（続けるには「読み取る」を押してください）</item>
+        <item name="done_reading">読み取りました！
+            （続けるには「読み取る」を押してください）</item>
+        <item name="incorrect_pattern">不正なパターンです
+            （続けるには「読み取る」を押してください）</item>
     </string-array>
 
 </resources>

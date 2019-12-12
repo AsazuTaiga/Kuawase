@@ -57,7 +57,7 @@ public class ModeChoiceFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         FragmentActivity parentActivity = Objects.requireNonNull(getActivity());
         viewModel = ViewModelUtils.provideViewModel(parentActivity, ModeChoiceViewModel.class);
-        soundPlayer = SoundPlayer.newInstance(parentActivity);
+        soundPlayer = new SoundPlayer(parentActivity);
 
         Objects.requireNonNull(parentButton);
         Objects.requireNonNull(childButton);

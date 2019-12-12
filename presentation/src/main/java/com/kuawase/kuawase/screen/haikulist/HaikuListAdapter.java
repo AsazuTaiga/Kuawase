@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.kuawase.kuawase.R;
+import com.kuawase.kuawase.utility.SoundPlayer;
 import com.kuawase.model.HaikuInfo;
 
 import java.util.List;
@@ -57,16 +58,20 @@ public class HaikuListAdapter extends ArrayAdapter<HaikuInfo> {
         ImageView downButton = convertView.findViewById(R.id.down_button);
 
         HaikuInfo haikuInfo = haikuInfos.get(position);
+        SoundPlayer player = new SoundPlayer(getContext());
 
         numberText.setText(String.valueOf(position + 1));
         haikuText.setText(haikuInfo.getHaiku());
         pointText.setText(String.format(FORMAT, String.valueOf(haikuInfo.getPoint())));
         upButton.setOnClickListener(l -> {
+            player.playTapSound();
             int point = haikuInfo.getPoint() + 1;
             haikuInfo.setPoint(point);
             pointText.setText(String.format(FORMAT, String.valueOf(point)));
+
         });
         downButton.setOnClickListener(l -> {
+            player.playTapSound();
             int point = haikuInfo.getPoint() - 1;
             haikuInfo.setPoint(point);
             pointText.setText(String.format(FORMAT, String.valueOf(point)));

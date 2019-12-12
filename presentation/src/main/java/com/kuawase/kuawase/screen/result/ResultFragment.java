@@ -64,7 +64,7 @@ public class ResultFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         FragmentActivity parentActivity = Objects.requireNonNull(getActivity());
         viewModel = ViewModelUtils.provideViewModel(parentActivity, ResultViewModel.class);
-        soundPlayer = SoundPlayer.newInstance(parentActivity);
+        soundPlayer = new SoundPlayer(parentActivity);
 
         Bundle args = Objects.requireNonNull(getArguments());
         viewModel.setKukaiId(args.getInt(KEY));
