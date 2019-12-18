@@ -41,11 +41,12 @@ public class MainActivity extends AppCompatActivity {
 
         // BGM再生
         SoundPlayer player = new SoundPlayer(this);
-        player.playBgm1();
 
         ModeChoiceViewModel modeChoiceViewModel = getViewModel(ModeChoiceViewModel.class);
-        modeChoiceViewModel.getOnParentButtonClick().observe(this,
-                event -> commitFragment(KukaiInputFragment.newInstance()));
+        modeChoiceViewModel.getOnParentButtonClick().observe(this, event -> {
+            commitFragment(KukaiInputFragment.newInstance());
+            player.playBgm1();
+        });
         modeChoiceViewModel.getOnChildButtonClick().observe(this,
                 event -> commitFragment(HaikuSubmitFragment.newInstance()));
 
@@ -75,10 +76,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         ResultViewModel resultViewModel = getViewModel(ResultViewModel.class);
-        resultViewModel.getOnExitButtonClick().observe(this, event -> {
-            player.playBgm1();
-            commitFragment(ModeChoiceFragment.newInstance());
-        });
+        resultViewModel.getOnExitButtonClick().observe(this,
+                event -> commitFragment(ModeChoiceFragment.newInstance()));
 
         HaikuSubmitViewModel haikuSubmitViewModel = getViewModel(HaikuSubmitViewModel.class);
         haikuSubmitViewModel.getOnSubmitButtonClick().observe(this, event -> {
