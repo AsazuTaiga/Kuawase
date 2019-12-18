@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="100dp"
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
@@ -27,9 +27,9 @@
 
     <ImageView
         android:id="@+id/up_button"
-        android:layout_width="30dp"
+        android:layout_width="50dp"
         android:layout_below="@id/number_text"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:layout_marginStart="6dp"
         android:layout_toStartOf="@id/point_text"
         android:background="@drawable/good_selector"
@@ -47,15 +47,17 @@
         android:layout_toStartOf="@id/down_button"
         android:background="@drawable/text_box"
         android:textSize="@dimen/font_size_small"
+        android:visibility="gone"
         tools:text="30点" />
 
     <ImageView
         android:id="@+id/down_button"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_below="@id/number_text"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="7dp"
+        android:layout_marginStart="40dp"
         android:background="@drawable/bad_selector"
         android:clickable="true"
         android:contentDescription="@string/decrease"
