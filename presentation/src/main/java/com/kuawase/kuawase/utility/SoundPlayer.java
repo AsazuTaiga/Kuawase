@@ -28,6 +28,7 @@ public class SoundPlayer {
     private static int tapSoundId;
     private static int finishReadSoundId;
     private static int resultSoundId;
+    private static int failedSoundId;
 
     public SoundPlayer(@NonNull Context context) {
         exoPlayer = new SimpleExoPlayer.Builder(context).build();
@@ -36,6 +37,7 @@ public class SoundPlayer {
         tapSoundId = soundPool.load(context, R.raw.tap, 1);
         finishReadSoundId = soundPool.load(context, R.raw.read_finish, 1);
         resultSoundId = soundPool.load(context, R.raw.result, 1);
+        failedSoundId = soundPool.load(context, R.raw.failed, 1);
     }
 
     public void playBgm1() {
@@ -64,7 +66,16 @@ public class SoundPlayer {
         playShortSound(resultSoundId);
     }
 
+    public void playFailedSound() {
+        playShortSound(failedSoundId);
+    }
+
     private void playShortSound(int soundId) {
-        soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f);
+        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int i, int i1) {
+                soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f);
+            }
+        });
     }
 }

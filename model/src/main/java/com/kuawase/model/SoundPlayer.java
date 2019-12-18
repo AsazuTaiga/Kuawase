@@ -33,10 +33,11 @@ public class SoundPlayer {
     private static LoopingMediaSource bgm1;
 
     @NonNull
-    private static SoundPool soundPool = new SoundPool.Builder().build();
+    private static SoundPool soundPool = new SoundPool.Builder().setMaxStreams(4).build();
     private static int tapSoundId;
     private static int finishReadSoundId;
     private static int resultSoundId;
+    private static int failedSoundId;
 
     private SoundPlayer() {
     }
@@ -55,6 +56,7 @@ public class SoundPlayer {
             tapSoundId = soundPool.load(am.openFd("tap.mp3"), 1);
             finishReadSoundId = soundPool.load(am.openFd("finish_read.mp3"), 1);
             resultSoundId = soundPool.load(am.openFd("result.mp3"), 1);
+            failedSoundId = soundPool.load(am.openFd("failed.mp3"), 1);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -88,6 +90,10 @@ public class SoundPlayer {
 
     public void playResultSound() {
         playShortSound(resultSoundId);
+    }
+
+    public void playFailedSound() {
+        playShortSound(failedSoundId);
     }
 
     private void playShortSound(int soundId) {
