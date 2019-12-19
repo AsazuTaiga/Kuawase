@@ -1,14 +1,21 @@
 package com.kuawase.kuawase.screen.haikusubmit;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.kuawase.kuawase.utility.Event;
+import com.kuawase.model.SoundPlayer;
 
 public class HaikuSubmitViewModel extends ViewModel {
     private static final String FORMAT = "%s;%s";
+
+    @Nullable
+    private SoundPlayer soundPlayer;
 
     @NonNull
     private final MutableLiveData<String> haiku = new MutableLiveData<>();
@@ -24,7 +31,12 @@ public class HaikuSubmitViewModel extends ViewModel {
         return onSubmitButtonClick;
     }
 
+    void prepareSoundPlayer(@NonNull Context context) {
+        soundPlayer = SoundPlayer.newInstance(context);
+    }
+
     void onSubmitButtonClick(@NonNull String haiku, @NonNull String author) {
+
         final String content = String.format(FORMAT, haiku, author);
         onSubmitButtonClick.setValue(new Event<>(content));
     }

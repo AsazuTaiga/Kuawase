@@ -1,5 +1,7 @@
 package com.kuawase.kuawase.screen.haikulist;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
@@ -11,6 +13,7 @@ import com.kuawase.model.HaikuInfo;
 import com.kuawase.model.KukaiInfo;
 import com.kuawase.model.KukaiInfoDataSource;
 import com.kuawase.model.KukaiInfoRepository;
+import com.kuawase.model.SoundPlayer;
 
 import java.util.Collections;
 import java.util.List;
@@ -25,6 +28,9 @@ public class HaikuListViewModel extends ViewModel {
     @Nullable
     private KukaiInfo kukaiInfo;
 
+    @Nullable
+    private SoundPlayer soundPlayer;
+
     @NonNull
     private MutableLiveData<Event<Integer>> onFinishVoteButtonClick = new MutableLiveData<>();
 
@@ -33,7 +39,13 @@ public class HaikuListViewModel extends ViewModel {
         return onFinishVoteButtonClick;
     }
 
+    void prepareSoundPlayer(@NonNull Context context) {
+        soundPlayer = SoundPlayer.newInstance(context);
+    }
+
     void onFinishVoteButtonClick() {
+        Objects.requireNonNull(soundPlayer);
+        soundPlayer.playResultSound();
         onFinishVoteButtonClick.setValue(new Event<>(kukaiId));
     }
 

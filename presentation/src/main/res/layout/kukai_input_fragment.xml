@@ -18,9 +18,9 @@
         android:id="@+id/kukai_name_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
         android:layout_below="@id/kukai_name_hint"
         android:background="@drawable/text_box"
+        android:inputType="text"
         android:textSize="@dimen/font_size_big"
         tools:ignore="Autofill" />
 
@@ -44,8 +44,8 @@
     <Button
         android:id="@+id/start_date_button"
         android:layout_width="match_parent"
-        android:layout_below="@id/start_date_text"
         android:layout_height="@dimen/button_height"
+        android:layout_below="@id/start_date_text"
         android:text="@string/choose_start_date" />
 
     <TextView
@@ -68,15 +68,15 @@
     <Button
         android:id="@+id/end_date_button"
         android:layout_width="match_parent"
-        android:layout_below="@id/end_date_text"
         android:layout_height="@dimen/button_height"
+        android:layout_below="@id/end_date_text"
         android:text="@string/choose_end_date" />
 
     <Button
         android:id="@+id/finish_input_button"
         android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
         android:layout_height="@dimen/button_height"
+        android:layout_alignParentBottom="true"
         android:text="@string/finish_input" />
 
 </RelativeLayout>

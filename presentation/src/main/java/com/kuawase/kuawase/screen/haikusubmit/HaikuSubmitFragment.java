@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.kuawase.kuawase.R;
-import com.kuawase.kuawase.utility.SoundPlayer;
 import com.kuawase.kuawase.utility.ViewModelUtils;
 
 import java.util.Objects;
@@ -30,9 +29,6 @@ public class HaikuSubmitFragment extends Fragment {
 
     @Nullable
     private Button submitButton;
-
-    @Nullable
-    private SoundPlayer soundPlayer;
 
     private HaikuSubmitFragment() {
     }
@@ -63,14 +59,12 @@ public class HaikuSubmitFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         FragmentActivity parentActivity = Objects.requireNonNull(getActivity());
         viewModel = ViewModelUtils.provideViewModel(parentActivity, HaikuSubmitViewModel.class);
-        soundPlayer = new SoundPlayer(parentActivity);
+
+        viewModel.prepareSoundPlayer(parentActivity);
 
         Objects.requireNonNull(haikuEdit);
         Objects.requireNonNull(authorEdit);
         Objects.requireNonNull(submitButton);
-        submitButton.setOnClickListener(l -> {
-            soundPlayer.playTapSound();
-            viewModel.onSubmitButtonClick(haikuEdit.getText().toString(), authorEdit.getText().toString());
-        });
+        submitButton.setOnClickListener(l -> viewModel.onSubmitButtonClick(haikuEdit.getText().toString(), authorEdit.getText().toString()));
     }
 }

@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:gravity="center"
-        android:textSize="@dimen/font_size_small"
-        android:text="@string/qr_show_message" />
+        android:text="@string/qr_show_message"
+        android:textSize="@dimen/font_size_small" />
 
 </LinearLayout>

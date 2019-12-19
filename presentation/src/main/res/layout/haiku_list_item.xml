@@ -19,17 +19,17 @@
     <TextView
         android:id="@+id/haiku_text"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/number_text"
         android:layout_marginStart="6dp"
         android:layout_toEndOf="@id/number_text"
-        android:layout_height="wrap_content"
         tools:text="古池や蛙飛び込む水の音" />
 
     <ImageView
         android:id="@+id/up_button"
         android:layout_width="50dp"
-        android:layout_below="@id/number_text"
         android:layout_height="50dp"
+        android:layout_below="@id/number_text"
         android:layout_marginStart="6dp"
         android:layout_toStartOf="@id/point_text"
         android:background="@drawable/good_selector"
@@ -40,12 +40,12 @@
     <TextView
         android:id="@+id/point_text"
         android:layout_width="50dp"
-        android:layout_below="@id/number_text"
         android:layout_height="wrap_content"
-        android:gravity="end"
+        android:layout_below="@id/number_text"
         android:layout_marginTop="5dp"
         android:layout_toStartOf="@id/down_button"
         android:background="@drawable/text_box"
+        android:gravity="end"
         android:textSize="@dimen/font_size_small"
         android:visibility="gone"
         tools:text="30点" />
@@ -56,8 +56,8 @@
         android:layout_height="50dp"
         android:layout_below="@id/number_text"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="7dp"
         android:layout_marginStart="40dp"
+        android:layout_marginTop="7dp"
         android:background="@drawable/bad_selector"
         android:clickable="true"
         android:contentDescription="@string/decrease"

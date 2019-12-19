@@ -21,7 +21,7 @@ public class ModeChoiceViewModel extends ViewModel {
     private final MutableLiveData<Event<Object>> onChildButotnClick = new MutableLiveData<>();
 
     @Nullable
-    private com.kuawase.model.SoundPlayer soundPlayer;
+    private SoundPlayer soundPlayer;
 
     @NonNull
     public LiveData<Event<Object>> getOnParentButtonClick() {
