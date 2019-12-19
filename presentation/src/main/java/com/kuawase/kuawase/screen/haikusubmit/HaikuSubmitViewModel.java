@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModel;
 import com.kuawase.kuawase.utility.Event;
 import com.kuawase.model.SoundPlayer;
 
+import java.util.Objects;
+
 public class HaikuSubmitViewModel extends ViewModel {
     private static final String FORMAT = "%s;%s";
 
@@ -36,7 +38,8 @@ public class HaikuSubmitViewModel extends ViewModel {
     }
 
     void onSubmitButtonClick(@NonNull String haiku, @NonNull String author) {
-
+        Objects.requireNonNull(soundPlayer);
+        soundPlayer.playTapSound();
         final String content = String.format(FORMAT, haiku, author);
         onSubmitButtonClick.setValue(new Event<>(content));
     }
