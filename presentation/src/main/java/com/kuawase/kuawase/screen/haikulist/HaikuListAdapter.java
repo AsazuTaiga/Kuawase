@@ -7,12 +7,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.kuawase.kuawase.R;
-import com.kuawase.kuawase.utility.SoundPlayer;
+import com.kuawase.model.SoundPlayer;
 import com.kuawase.model.HaikuInfo;
 
 import java.util.List;
@@ -27,10 +28,18 @@ public class HaikuListAdapter extends ArrayAdapter<HaikuInfo> {
     @NonNull
     private LayoutInflater layoutInflater;
 
+    @NonNull
+    private Context context;
+
+    @NonNull
+    private SoundPlayer player;
+
     HaikuListAdapter(@NonNull Context context, @NonNull List<HaikuInfo> haikuInfos) {
         super(context, R.layout.haiku_list_item, haikuInfos);
         this.haikuInfos = haikuInfos;
         this.layoutInflater = (LayoutInflater) Objects.requireNonNull(context.getSystemService(Context.LAYOUT_INFLATER_SERVICE));
+        this.context = context;
+        this.player = SoundPlayer.newInstance(context);
     }
 
     @Override
@@ -58,23 +67,29 @@ public class HaikuListAdapter extends ArrayAdapter<HaikuInfo> {
         ImageView downButton = convertView.findViewById(R.id.down_button);
 
         HaikuInfo haikuInfo = haikuInfos.get(position);
-        SoundPlayer player = new SoundPlayer(getContext());
 
         numberText.setText(String.valueOf(position + 1));
         haikuText.setText(haikuInfo.getHaiku());
         pointText.setText(String.format(FORMAT, String.valueOf(haikuInfo.getPoint())));
         upButton.setOnClickListener(l -> {
             player.playTapSound();
-            int point = haikuInfo.getPoint() + 1;
+            int point = haikuInfo.getPoint() + (int)(Math.random() * 10);
             haikuInfo.setPoint(point);
             pointText.setText(String.format(FORMAT, String.valueOf(point)));
 
         });
         downButton.setOnClickListener(l -> {
-            player.playTapSound();
-            int point = haikuInfo.getPoint() - 1;
+            player.playFailedSound();
+            int point = haikuInfo.getPoint() - (int)(Math.random() * 1000);
             haikuInfo.setPoint(point);
             pointText.setText(String.format(FORMAT, String.valueOf(point)));
+
+            ImageView v = new ImageView(context);
+            v.setImageResource(R.drawable.yakisoba);
+            Toast toast = new Toast(context);
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.setView(v);
+            toast.show();
         });
 
         return convertView;

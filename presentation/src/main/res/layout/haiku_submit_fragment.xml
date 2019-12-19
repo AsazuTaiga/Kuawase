@@ -8,9 +8,9 @@
     tools:context=".screen.haikusubmit.HaikuSubmitFragment">
 
     <TextView
-        android:layout_marginTop="100dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:labelFor="@+id/haiku_edit"
         android:text="@string/haiku_hint" />
 
@@ -19,17 +19,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:inputType="textNoSuggestions"
         android:background="@drawable/text_box"
+        android:inputType="textNoSuggestions"
         android:textSize="@dimen/font_size_big"
-        tools:text="テキスト"
-        tools:ignore="Autofill" />
+        tools:ignore="Autofill"
+        tools:text="テキスト" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:labelFor="@id/author_edit"
         android:layout_marginTop="100dp"
+        android:labelFor="@id/author_edit"
         android:text="@string/author_hint" />
 
     <EditText
@@ -37,8 +37,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:inputType="textNoSuggestions"
         android:background="@drawable/text_box"
+        android:inputType="textNoSuggestions"
         android:textSize="@dimen/font_size_big"
         tools:ignore="Autofill" />
 

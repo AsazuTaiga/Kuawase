@@ -22,14 +22,17 @@ import com.kuawase.kuawase.screen.qrread.QRReadViewModel;
 import com.kuawase.kuawase.screen.qrshow.QRShowFragment;
 import com.kuawase.kuawase.screen.result.ResultFragment;
 import com.kuawase.kuawase.screen.result.ResultViewModel;
-import com.kuawase.kuawase.utility.SoundPlayer;
 import com.kuawase.kuawase.utility.ViewModelUtils;
+import com.kuawase.model.SoundPlayer;
 
 public class MainActivity extends AppCompatActivity {
+    private SoundPlayer soundPlayer;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        soundPlayer = SoundPlayer.newInstance(this);
 
         ModeChoiceFragment modeChoiceFragment = ModeChoiceFragment.newInstance();
         getSupportFragmentManager().beginTransaction().add(R.id.container, modeChoiceFragment).commit();
@@ -39,13 +42,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        // BGM再生
-        SoundPlayer player = new SoundPlayer(this);
-        player.playBgm1();
-
         ModeChoiceViewModel modeChoiceViewModel = getViewModel(ModeChoiceViewModel.class);
-        modeChoiceViewModel.getOnParentButtonClick().observe(this,
-                event -> commitFragment(KukaiInputFragment.newInstance()));
+        modeChoiceViewModel.getOnParentButtonClick().observe(this, event -> {
+            commitFragment(KukaiInputFragment.newInstance());
+            soundPlayer.playBgm1();
+        });
         modeChoiceViewModel.getOnChildButtonClick().observe(this,
                 event -> commitFragment(HaikuSubmitFragment.newInstance()));
 
@@ -69,16 +70,14 @@ public class MainActivity extends AppCompatActivity {
         haikuListViewModel.getOnFinishInputButtonClick().observe(this, event -> {
             Integer kukaiId = event.getContentIfNotHandled();
             if (null != kukaiId) {
-                player.stopBgm();
+                soundPlayer.stopBgm();
                 commitFragment(ResultFragment.newInstance(kukaiId));
             }
         });
 
         ResultViewModel resultViewModel = getViewModel(ResultViewModel.class);
-        resultViewModel.getOnExitButtonClick().observe(this, event -> {
-            player.playBgm1();
-            commitFragment(ModeChoiceFragment.newInstance());
-        });
+        resultViewModel.getOnExitButtonClick().observe(this,
+                event -> commitFragment(ModeChoiceFragment.newInstance()));
 
         HaikuSubmitViewModel haikuSubmitViewModel = getViewModel(HaikuSubmitViewModel.class);
         haikuSubmitViewModel.getOnSubmitButtonClick().observe(this, event -> {

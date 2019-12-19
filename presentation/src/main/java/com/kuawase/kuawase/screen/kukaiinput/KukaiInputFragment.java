@@ -15,8 +15,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.kuawase.kuawase.R;
-import com.kuawase.kuawase.utility.SoundPlayer;
 import com.kuawase.kuawase.utility.ViewModelUtils;
+import com.kuawase.model.SoundPlayer;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -81,7 +81,7 @@ public class KukaiInputFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         FragmentActivity parentActivity = Objects.requireNonNull(getActivity());
         viewModel = ViewModelUtils.provideViewModel(parentActivity, KukaiInputViewModel.class);
-        soundPlayer = new SoundPlayer(parentActivity);
+        soundPlayer = SoundPlayer.newInstance(parentActivity);
 
         FragmentManager fragmentManager = Objects.requireNonNull(getFragmentManager());
         SelectDateFragment startDateFragment = getSelectDateFragment(Objects.requireNonNull(startDateText));

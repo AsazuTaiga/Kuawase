@@ -1,5 +1,7 @@
 package com.kuawase.kuawase.screen.result;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
@@ -11,6 +13,7 @@ import com.kuawase.model.HaikuInfo;
 import com.kuawase.model.KukaiInfo;
 import com.kuawase.model.KukaiInfoDataSource;
 import com.kuawase.model.KukaiInfoRepository;
+import com.kuawase.model.SoundPlayer;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -26,6 +29,9 @@ public class ResultViewModel extends ViewModel {
     @Nullable
     private KukaiInfo kukaiInfo;
 
+    @Nullable
+    private SoundPlayer soundPlayer;
+
     @NonNull
     private MutableLiveData<Event<Object>> onExitButtonClick = new MutableLiveData<>();
 
@@ -34,7 +40,13 @@ public class ResultViewModel extends ViewModel {
         return onExitButtonClick;
     }
 
+    void prepareSoundPlayer(@NonNull Context context) {
+        soundPlayer = SoundPlayer.newInstance(context);
+    }
+
     void onExitButtonClick() {
+        Objects.requireNonNull(soundPlayer);
+        soundPlayer.playTapSound();
         dataSource.deleteKukaiInfo();
         onExitButtonClick.setValue(new Event<>(new Object()));
     }

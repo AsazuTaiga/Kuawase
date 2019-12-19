@@ -21,6 +21,9 @@ android {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -36,5 +39,4 @@ dependencies {
     implementation project(path: ':model')
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
     implementation 'com.google.zxing:core:3.3.2'
-    implementation 'com.google.android.exoplayer:exoplayer:2.11.0'
 }
