@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -80,12 +81,13 @@ public class HaikuListAdapter extends ArrayAdapter<HaikuInfo> {
         });
         downButton.setOnClickListener(l -> {
             player.playFailedSound();
-            int point = haikuInfo.getPoint() - (int)(Math.random() * 1000);
+            int point = haikuInfo.getPoint() - (int)(Math.random() * 10000);
             haikuInfo.setPoint(point);
             pointText.setText(String.format(FORMAT, String.valueOf(point)));
 
             ImageView v = new ImageView(context);
-            v.setImageResource(R.drawable.yakisoba);
+            int drawableRes = Images.getRandom().getRes();
+            v.setImageResource(drawableRes);
             Toast toast = new Toast(context);
             toast.setDuration(Toast.LENGTH_SHORT);
             toast.setView(v);
@@ -93,5 +95,27 @@ public class HaikuListAdapter extends ArrayAdapter<HaikuInfo> {
         });
 
         return convertView;
+    }
+
+    private enum Images {
+        Mazui(R.drawable.mazui),
+        Money(R.drawable.money),
+        Yakisoba(R.drawable.yakisoba),
+        Yukidaruma(R.drawable.yukidaruma);
+
+        @DrawableRes
+        private int res;
+
+        Images(int res) {
+            this.res = res;
+        }
+
+        int getRes() {
+            return res;
+        }
+
+        static Images getRandom() {
+            return values()[(int) (Math.random() * values().length)];
+        }
     }
 }
