@@ -92,7 +92,7 @@ public class QRReadFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         FragmentActivity parentActivity = Objects.requireNonNull(getActivity());
         viewModel = ViewModelUtils.provideViewModel(parentActivity, QRReadViewModel.class);
-        soundPlayer = SoundPlayer.newInstance(parentActivity);
+        soundPlayer = SoundPlayer.getInstance(parentActivity);
 
         Bundle args = getArguments();
         Objects.requireNonNull(args);

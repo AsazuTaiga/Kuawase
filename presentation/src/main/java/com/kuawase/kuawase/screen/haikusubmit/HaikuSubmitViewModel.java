@@ -34,7 +34,7 @@ public class HaikuSubmitViewModel extends ViewModel {
     }
 
     void prepareSoundPlayer(@NonNull Context context) {
-        soundPlayer = SoundPlayer.newInstance(context);
+        soundPlayer = SoundPlayer.getInstance(context);
     }
 
     void onSubmitButtonClick(@NonNull String haiku, @NonNull String author) {

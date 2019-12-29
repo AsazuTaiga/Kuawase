@@ -40,7 +40,7 @@ public class HaikuListAdapter extends ArrayAdapter<HaikuInfo> {
         this.haikuInfos = haikuInfos;
         this.layoutInflater = (LayoutInflater) Objects.requireNonNull(context.getSystemService(Context.LAYOUT_INFLATER_SERVICE));
         this.context = context;
-        this.player = SoundPlayer.newInstance(context);
+        this.player = SoundPlayer.getInstance(context);
     }
 
     @Override

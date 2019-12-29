@@ -41,7 +41,7 @@ public class SoundPlayer {
     }
 
     @NonNull
-    public static SoundPlayer newInstance(@NonNull Context context) {
+    public static SoundPlayer getInstance(@NonNull Context context) {
         if (null == singletonInstance) {
             singletonInstance = new SoundPlayer();
             exoPlayer = new SimpleExoPlayer.Builder(context).build();

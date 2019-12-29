@@ -9,6 +9,6 @@ public class KuawaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        SoundPlayer.newInstance(getApplicationContext());
+        SoundPlayer.getInstance(getApplicationContext());
     }
 }
