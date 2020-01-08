@@ -1,56 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/default_padding"
-    tools:context=".screen.haikusubmit.HaikuSubmitFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:labelFor="@+id/haiku_edit"
-        android:text="@string/haiku_hint" />
+<layout>
 
-    <EditText
-        android:id="@+id/haiku_edit"
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.kuawase.kuawase.screen.haikusubmit.HaikuSubmitViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/text_box"
-        android:inputType="textNoSuggestions"
-        android:textSize="@dimen/font_size_big"
-        tools:ignore="Autofill"
-        tools:text="テキスト" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/default_padding"
+        tools:context=".screen.haikusubmit.HaikuSubmitFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:labelFor="@id/author_edit"
-        android:text="@string/author_hint" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:labelFor="@+id/haiku_edit"
+            android:text="@string/haiku_hint" />
 
-    <EditText
-        android:id="@+id/author_edit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/text_box"
-        android:inputType="textNoSuggestions"
-        android:textSize="@dimen/font_size_big"
-        tools:ignore="Autofill" />
+        <EditText
+            android:id="@+id/haiku_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/text_box"
+            android:inputType="textNoSuggestions"
+            android:text="@={viewModel.haiku}"
+            android:textSize="@dimen/font_size_big"
+            tools:ignore="Autofill"
+            tools:text="テキスト" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:labelFor="@id/author_edit"
+            android:text="@string/author_hint" />
 
-    <Button
-        android:id="@+id/submit_button"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/button_height"
-        android:text="@string/submit" />
+        <EditText
+            android:id="@+id/author_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/text_box"
+            android:inputType="textNoSuggestions"
+            android:text="@={viewModel.author}"
+            android:textSize="@dimen/font_size_big"
+            tools:ignore="Autofill" />
 
-</LinearLayout>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:onClick="@{() -> viewModel.onSubmitButtonClick()}"
+            android:text="@string/submit" />
+
+    </LinearLayout>
+</layout>

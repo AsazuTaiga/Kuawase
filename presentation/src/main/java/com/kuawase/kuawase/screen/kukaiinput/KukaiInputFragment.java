@@ -81,7 +81,7 @@ public class KukaiInputFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         FragmentActivity parentActivity = Objects.requireNonNull(getActivity());
         viewModel = ViewModelUtils.provideViewModel(parentActivity, KukaiInputViewModel.class);
-        soundPlayer = SoundPlayer.newInstance(parentActivity);
+        soundPlayer = SoundPlayer.getInstance(parentActivity);
 
         FragmentManager fragmentManager = Objects.requireNonNull(getFragmentManager());
         SelectDateFragment startDateFragment = getSelectDateFragment(Objects.requireNonNull(startDateText));

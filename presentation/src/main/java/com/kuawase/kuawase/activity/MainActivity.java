@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        soundPlayer = SoundPlayer.newInstance(this);
+        soundPlayer = SoundPlayer.getInstance(this);
 
         ModeChoiceFragment modeChoiceFragment = ModeChoiceFragment.newInstance();
         getSupportFragmentManager().beginTransaction().add(R.id.container, modeChoiceFragment).commit();

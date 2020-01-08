@@ -4,25 +4,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.kuawase.kuawase.R;
+import com.kuawase.kuawase.databinding.QrShowFragmentBinding;
 import com.kuawase.kuawase.utility.ViewModelUtils;
 
 import java.util.Objects;
 
 public class QRShowFragment extends Fragment {
     private static final String KEY = "content";
-
     @Nullable
-    private QRShowViewModel viewModel;
-
-    @Nullable
-    private ImageView qrCodeImage;
+    private QrShowFragmentBinding binding;
 
     private QRShowFragment() {
     }
@@ -40,24 +38,27 @@ public class QRShowFragment extends Fragment {
     @NonNull
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.qr_show_fragment, container, false);
+        binding = DataBindingUtil.inflate(inflater,
+                R.layout.qr_show_fragment, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        qrCodeImage = view.findViewById(R.id.qr_code_image);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = ViewModelUtils.provideViewModel(Objects.requireNonNull(getActivity()), QRShowViewModel.class);
         Bundle args = Objects.requireNonNull(getArguments());
-        String content = args.getString(KEY);
-        Objects.requireNonNull(viewModel);
-        Objects.requireNonNull(qrCodeImage);
-        Objects.requireNonNull(content);
-        viewModel.showQrCodeDrawable(qrCodeImage, content);
+        String content = Objects.requireNonNull(args.getString(KEY));
+        FragmentActivity parentActivity = Objects.requireNonNull(getActivity());
+        QRShowViewModel viewModel = ViewModelUtils.provideViewModel(parentActivity, QRShowViewModel.class);
+
+        Objects.requireNonNull(binding);
+        binding.setViewModel(viewModel);
+        binding.setLifecycleOwner(parentActivity);
+        viewModel.setQrImageLiveDataFromString(content);
     }
 }

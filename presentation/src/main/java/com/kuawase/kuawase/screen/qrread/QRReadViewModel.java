@@ -19,8 +19,8 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class QRReadViewModel extends ViewModel {
-    private static final String PATTERN = "^.*;.*$";
     private static final String SPLITTER = ";";
+    private static final String PATTERN = "^.*" + SPLITTER + ".*$";
     private static final String ERROR_MESSAGE = "不正なパターンです";
 
     @NonNull
