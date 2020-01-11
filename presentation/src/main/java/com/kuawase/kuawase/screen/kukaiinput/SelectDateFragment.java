@@ -51,7 +51,7 @@ public class SelectDateFragment extends DialogFragment
         textView.setText(getResources().getString(R.string.date_format, yyyy, mm + 1, dd));
     }
 
-    public void setOnDismissListner(DialogInterface.OnDismissListener l) {
+    public void setOnDismissListener(DialogInterface.OnDismissListener l) {
         onDismissListener = l;
     }
 

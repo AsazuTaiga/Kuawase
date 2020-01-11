@@ -85,9 +85,9 @@ public class KukaiInputFragment extends Fragment {
 
         FragmentManager fragmentManager = Objects.requireNonNull(getFragmentManager());
         SelectDateFragment startDateFragment = getSelectDateFragment(Objects.requireNonNull(startDateText));
-        startDateFragment.setOnDismissListner(l -> viewModel.setShowingDateFragment(false));
+        startDateFragment.setOnDismissListener(l -> viewModel.setShowingDateFragment(false));
         SelectDateFragment endDateFragment = getSelectDateFragment(Objects.requireNonNull(endDateText));
-        endDateFragment.setOnDismissListner(l -> viewModel.setShowingDateFragment(false));
+        endDateFragment.setOnDismissListener(l -> viewModel.setShowingDateFragment(false));
 
         Objects.requireNonNull(startDateButton);
         Objects.requireNonNull(startDateText);
