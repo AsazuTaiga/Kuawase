@@ -20,6 +20,8 @@ import com.google.android.exoplayer2.util.Util;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class SoundPlayer {
     @Nullable
@@ -36,6 +38,11 @@ public class SoundPlayer {
     private static int finishReadSoundId;
     private static int resultSoundId;
     private static int failedSoundId;
+
+    @NonNull
+    private static Executor soundPoolExecutor = Executors.newSingleThreadExecutor();
+    @NonNull
+    private static Executor exoPlayerExecutor = Executors.newSingleThreadExecutor();
 
     private SoundPlayer() {
     }
@@ -71,13 +78,17 @@ public class SoundPlayer {
     public void playBgm1() {
         Objects.requireNonNull(exoPlayer);
         Objects.requireNonNull(bgm1);
-        exoPlayer.prepare(bgm1);
-        exoPlayer.setPlayWhenReady(true);
+        exoPlayerExecutor.execute(() -> {
+            exoPlayer.prepare(bgm1);
+            exoPlayer.setPlayWhenReady(true);
+        });
     }
 
     public void stopBgm() {
         Objects.requireNonNull(exoPlayer);
-        exoPlayer.stop();
+        exoPlayerExecutor.execute(() -> {
+            exoPlayer.stop();
+        });
     }
 
     public void playTapSound() {
@@ -96,7 +107,15 @@ public class SoundPlayer {
         playShortSound(failedSoundId);
     }
 
+    public void release() {
+        soundPool.release();
+        if (null != exoPlayer) {
+            exoPlayer.release();
+        }
+    }
+
     private void playShortSound(int soundId) {
-        soundPool.play(soundId, 1.0f, 1.0f, 0, 0, 1.0f);
+        soundPoolExecutor.execute(() -> soundPool.play(soundId,
+                1.0f, 1.0f, 0, 0, 1.0f));
     }
 }

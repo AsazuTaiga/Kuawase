@@ -12,8 +12,6 @@ import com.kuawase.kuawase.utility.Event;
 import com.kuawase.model.SoundPlayer;
 
 import java.util.Objects;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 public class ModeChoiceViewModel extends ViewModel {
     @NonNull
@@ -35,22 +33,19 @@ public class ModeChoiceViewModel extends ViewModel {
         return onChildButotnClick;
     }
 
-    @NonNull
-    private Executor executor = Executors.newSingleThreadExecutor();
-
     void prepareSoundPlayer(@NonNull Context context) {
-        executor.execute(() -> soundPlayer = SoundPlayer.getInstance(context));
+        soundPlayer = SoundPlayer.getInstance(context);
     }
 
     public void onParentButtonClick() {
         Objects.requireNonNull(soundPlayer);
-        executor.execute(() -> soundPlayer.playTapSound());
+        soundPlayer.playTapSound();
         onParentButtonClick.setValue(new Event<>(new Object()));
     }
 
     public void onChildButtonClick() {
         Objects.requireNonNull(soundPlayer);
-        executor.execute(() -> soundPlayer.playTapSound());
+        soundPlayer.playTapSound();
         onChildButotnClick.setValue(new Event<>(new Object()));
     }
 }

@@ -12,8 +12,6 @@ import com.kuawase.kuawase.utility.Event;
 import com.kuawase.model.SoundPlayer;
 
 import java.util.Objects;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 public class HaikuSubmitViewModel extends ViewModel {
     private static final String FORMAT = "%s;%s";
@@ -23,8 +21,6 @@ public class HaikuSubmitViewModel extends ViewModel {
     private final MutableLiveData<String> author = new MutableLiveData<>();
     @NonNull
     private final MutableLiveData<Event<String>> onSubmitButtonClick = new MutableLiveData<>();
-    @NonNull
-    private final Executor executor = Executors.newSingleThreadExecutor();
     @Nullable
     private SoundPlayer soundPlayer;
 
@@ -44,12 +40,12 @@ public class HaikuSubmitViewModel extends ViewModel {
     }
 
     void prepareSoundPlayer(@NonNull Context context) {
-        executor.execute(() -> soundPlayer = SoundPlayer.getInstance(context));
+        soundPlayer = SoundPlayer.getInstance(context);
     }
 
     public void onSubmitButtonClick() {
         Objects.requireNonNull(soundPlayer);
-        executor.execute(() -> soundPlayer.playTapSound());
+        soundPlayer.playTapSound();
         final String content = String.format(FORMAT, getHaiku().getValue(), getAuthor().getValue());
         onSubmitButtonClick.setValue(new Event<>(content));
     }
