@@ -4,15 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.kuawase.kuawase.R;
+import com.kuawase.kuawase.databinding.HaikuListFragmentBinding;
 import com.kuawase.kuawase.utility.ViewModelUtils;
 
 import java.util.Objects;
@@ -21,13 +21,7 @@ public class HaikuListFragment extends Fragment {
     private static final String KEY = "kukaiId";
 
     @Nullable
-    private HaikuListViewModel viewModel;
-
-    @Nullable
-    private ListView haikuList;
-
-    @Nullable
-    private Button finishVoteButton;
+    private HaikuListFragmentBinding binding;
 
     private HaikuListFragment() {
     }
@@ -44,31 +38,25 @@ public class HaikuListFragment extends Fragment {
     @NonNull
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.haiku_list_fragment, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        haikuList = view.findViewById(R.id.haiku_list);
-        finishVoteButton = view.findViewById(R.id.finish_vote_button);
-        super.onViewCreated(view, savedInstanceState);
+        binding = DataBindingUtil.inflate(inflater,
+                R.layout.haiku_list_fragment, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         FragmentActivity parentActivity = Objects.requireNonNull(getActivity());
-        viewModel = ViewModelUtils.provideViewModel(parentActivity, HaikuListViewModel.class);
+        HaikuListViewModel viewModel =
+                ViewModelUtils.provideViewModel(parentActivity, HaikuListViewModel.class);
+        Objects.requireNonNull(binding);
+        binding.setLifecycleOwner(parentActivity);
+        binding.setViewModel(viewModel);
 
         Bundle args = new Bundle();
         viewModel.setKukaiId(args.getInt(KEY));
 
         viewModel.prepareSoundPlayer(parentActivity);
-
-        Objects.requireNonNull(haikuList);
-        haikuList.setAdapter(new HaikuListAdapter(parentActivity, viewModel.getRondomHaikuInfos()));
-
-        Objects.requireNonNull(finishVoteButton);
-        finishVoteButton.setOnClickListener(l -> viewModel.onFinishVoteButtonClick());
+        binding.haikuList.setAdapter(new HaikuListAdapter(parentActivity, viewModel.getRandomHaikuInfos()));
     }
 }

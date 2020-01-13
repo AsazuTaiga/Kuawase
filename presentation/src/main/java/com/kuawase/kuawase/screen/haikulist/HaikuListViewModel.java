@@ -43,7 +43,7 @@ public class HaikuListViewModel extends ViewModel {
         soundPlayer = SoundPlayer.getInstance(context);
     }
 
-    void onFinishVoteButtonClick() {
+    public void onFinishVoteButtonClick() {
         Objects.requireNonNull(soundPlayer);
         soundPlayer.playResultSound();
         onFinishVoteButtonClick.setValue(new Event<>(kukaiId));
@@ -62,7 +62,7 @@ public class HaikuListViewModel extends ViewModel {
     }
 
     @NonNull
-    List<HaikuInfo> getRondomHaikuInfos() {
+    List<HaikuInfo> getRandomHaikuInfos() {
         List<HaikuInfo> haikuInfos = getKukaiInfo().getHaikuInfos();
         Collections.shuffle(haikuInfos);
         return haikuInfos;

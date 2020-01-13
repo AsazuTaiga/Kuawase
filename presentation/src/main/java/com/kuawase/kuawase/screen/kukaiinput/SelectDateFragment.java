@@ -20,6 +20,8 @@ import java.util.Objects;
 public class SelectDateFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
     // TODO: TextViewを内部で抱え込まないようにしたい
+    // TODO: SelectDateFragment->KukaiInputViewModel->KukaiInputFragmentへと結果通知する設計へ
+    // TODO: newInstance(Fragment targetFragment, int requestCode)したうえで値を返す？
     @Nullable
     private TextView textView = null;
 
