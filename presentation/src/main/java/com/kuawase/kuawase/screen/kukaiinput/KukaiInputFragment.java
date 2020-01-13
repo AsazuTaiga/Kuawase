@@ -49,7 +49,7 @@ public class KukaiInputFragment extends Fragment {
     @Nullable
     private SoundPlayer soundPlayer;
 
-    private KukaiInputFragment() {
+    public KukaiInputFragment() {
     }
 
     @NonNull

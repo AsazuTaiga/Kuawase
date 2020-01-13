@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/modeChoiceFragment">
+
+    <fragment
+        android:id="@+id/modeChoiceFragment"
+        android:name="com.kuawase.kuawase.screen.modechoice.ModeChoiceFragment"
+        android:label="mode_choice_fragment"
+        tools:layout="@layout/mode_choice_fragment" >
+        <action
+            android:id="@+id/action_modeChoiceFragment_to_kukaiInputFragment"
+            app:destination="@+id/kukaiInputFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_modeChoiceFragment_to_haikuSubmitFragment"
+            app:destination="@id/haikuSubmitFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/kukaiInputFragment"
+        android:name="com.kuawase.kuawase.screen.kukaiinput.KukaiInputFragment"
+        android:label="kukai_input_fragment"
+        tools:layout="@layout/kukai_input_fragment" >
+        <action
+            android:id="@+id/action_kukaiInputFragment_to_QRReadFragment"
+            app:destination="@id/QRReadFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/haikuSubmitFragment"
+        android:name="com.kuawase.kuawase.screen.haikusubmit.HaikuSubmitFragment"
+        android:label="haiku_submit_fragment"
+        tools:layout="@layout/haiku_submit_fragment" >
+        <action
+            android:id="@+id/action_haikuSubmitFragment_to_QRShowFragment"
+            app:destination="@id/QRShowFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/QRReadFragment"
+        android:name="com.kuawase.kuawase.screen.qrread.QRReadFragment"
+        android:label="qr_read_fragment"
+        tools:layout="@layout/qr_read_fragment" >
+        <action
+            android:id="@+id/action_QRReadFragment_to_haikuListFragment"
+            app:destination="@id/haikuListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/QRShowFragment"
+        android:name="com.kuawase.kuawase.screen.qrshow.QRShowFragment"
+        android:label="qr_show_fragment"
+        tools:layout="@layout/qr_show_fragment" >
+        <action
+            android:id="@+id/action_QRShowFragment_to_modeChoiceFragment"
+            app:destination="@id/modeChoiceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/haikuListFragment"
+        android:name="com.kuawase.kuawase.screen.haikulist.HaikuListFragment"
+        android:label="haiku_list_fragment"
+        tools:layout="@layout/haiku_list_fragment" >
+        <action
+            android:id="@+id/action_haikuListFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.kuawase.kuawase.screen.result.ResultFragment"
+        android:label="result_fragment"
+        tools:layout="@layout/result_fragment" >
+        <action
+            android:id="@+id/action_resultFragment_to_modeChoiceFragment"
+            app:destination="@id/modeChoiceFragment" />
+    </fragment>
+</navigation>

@@ -21,7 +21,7 @@ public class ModeChoiceFragment extends Fragment {
     @Nullable
     private ModeChoiceFragmentBinding binding;
 
-    private ModeChoiceFragment() {
+    public ModeChoiceFragment() {
     }
 
     @NonNull

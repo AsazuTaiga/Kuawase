@@ -45,7 +45,7 @@ public class QRReadFragment extends Fragment {
     @Nullable
     private SoundPlayer soundPlayer;
 
-    private QRReadFragment() {
+    public QRReadFragment() {
     }
 
     @NonNull

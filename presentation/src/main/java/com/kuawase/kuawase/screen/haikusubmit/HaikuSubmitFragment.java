@@ -21,7 +21,7 @@ public class HaikuSubmitFragment extends Fragment {
     @Nullable
     private HaikuSubmitFragmentBinding binding;
 
-    private HaikuSubmitFragment() {
+    public HaikuSubmitFragment() {
     }
 
     @NonNull

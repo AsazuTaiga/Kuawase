@@ -7,6 +7,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
+import androidx.navigation.NavController;
+import androidx.navigation.NavGraph;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.kuawase.kuawase.R;
 import com.kuawase.kuawase.screen.haikulist.HaikuListFragment;
@@ -27,6 +31,7 @@ import com.kuawase.model.SoundPlayer;
 
 public class MainActivity extends AppCompatActivity {
     private SoundPlayer soundPlayer;
+    private NavController navController;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,8 +39,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         soundPlayer = SoundPlayer.getInstance(this);
 
-        ModeChoiceFragment modeChoiceFragment = ModeChoiceFragment.newInstance();
-        getSupportFragmentManager().beginTransaction().add(R.id.container, modeChoiceFragment).commit();
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        navController.setGraph(R.navigation.nav_graph);
+        commitFragment(NavHostFragment.create(R.navigation.nav_graph));
     }
 
     @Override
@@ -44,17 +50,17 @@ public class MainActivity extends AppCompatActivity {
 
         ModeChoiceViewModel modeChoiceViewModel = getViewModel(ModeChoiceViewModel.class);
         modeChoiceViewModel.getOnParentButtonClick().observe(this, event -> {
-            commitFragment(KukaiInputFragment.newInstance());
+            navController.navigate(R.id.action_modeChoiceFragment_to_kukaiInputFragment);
             soundPlayer.playBgm1();
         });
         modeChoiceViewModel.getOnChildButtonClick().observe(this,
-                event -> commitFragment(HaikuSubmitFragment.newInstance()));
+                event -> navController.navigate(R.id.action_modeChoiceFragment_to_haikuSubmitFragment));
 
         KukaiInputViewModel kukaiInputViewModel = getViewModel(KukaiInputViewModel.class);
         kukaiInputViewModel.getOnFinishInputButtonClick().observe(this, event -> {
             Integer kukaiId = event.getContentIfNotHandled();
             if (null != kukaiId) {
-                commitFragment(QRReadFragment.newInstance(kukaiId));
+                navController.navigate(R.id.action_kukaiInputFragment_to_QRReadFragment);
             }
         });
 
@@ -62,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         qrReadViewModel.getOnFinishReadButtonClick().observe(this, event -> {
             Integer kukaiId = event.getContentIfNotHandled();
             if (null != kukaiId) {
-                commitFragment(HaikuListFragment.newInstance(kukaiId));
+                navController.navigate(R.id.action_QRReadFragment_to_haikuListFragment);
             }
         });
 
@@ -71,19 +77,19 @@ public class MainActivity extends AppCompatActivity {
             Integer kukaiId = event.getContentIfNotHandled();
             if (null != kukaiId) {
                 soundPlayer.stopBgm();
-                commitFragment(ResultFragment.newInstance(kukaiId));
+                navController.navigate(R.id.action_haikuListFragment_to_resultFragment);
             }
         });
 
         ResultViewModel resultViewModel = getViewModel(ResultViewModel.class);
         resultViewModel.getOnExitButtonClick().observe(this,
-                event -> commitFragment(ModeChoiceFragment.newInstance()));
+                event -> navController.navigate(R.id.action_resultFragment_to_modeChoiceFragment));
 
         HaikuSubmitViewModel haikuSubmitViewModel = getViewModel(HaikuSubmitViewModel.class);
         haikuSubmitViewModel.getOnSubmitButtonClick().observe(this, event -> {
             String content = event.getContentIfNotHandled();
             if (null != content) {
-                commitFragment(QRShowFragment.newInstance(content));
+                navController.navigate(R.id.action_haikuSubmitFragment_to_QRShowFragment);
             }
         });
     }

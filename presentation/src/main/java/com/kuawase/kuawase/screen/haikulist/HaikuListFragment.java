@@ -23,7 +23,7 @@ public class HaikuListFragment extends Fragment {
     @Nullable
     private HaikuListFragmentBinding binding;
 
-    private HaikuListFragment() {
+    public HaikuListFragment() {
     }
 
     @NonNull

@@ -22,7 +22,7 @@ public class QRShowFragment extends Fragment {
     @Nullable
     private QrShowFragmentBinding binding;
 
-    private QRShowFragment() {
+    public QRShowFragment() {
     }
 
     @NonNull

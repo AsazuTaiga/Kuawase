@@ -22,7 +22,7 @@ public class ResultFragment extends Fragment {
     @Nullable
     private ResultFragmentBinding binding;
 
-    private ResultFragment() {
+    public ResultFragment() {
     }
 
     @NonNull

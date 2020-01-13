@@ -7,6 +7,7 @@
     android:gravity="bottom"
     android:orientation="vertical"
     android:padding="@dimen/default_padding"
+    app:navGraph="@navigation/nav_graph"
     tools:context=".screen.qrread.QRReadFragment">
 
     <com.journeyapps.barcodescanner.CompoundBarcodeView
