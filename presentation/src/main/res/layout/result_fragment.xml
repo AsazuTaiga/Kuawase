@@ -1,35 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.kuawase.kuawase.screen.result.ResultViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".screen.result.ResultFragment">
 
-    <TextView
-        android:id="@+id/title_text"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:background="@color/colorPrimaryDark"
-        android:gravity="center"
-        android:padding="@dimen/default_padding"
-        android:text="@string/result_announcement"
-        android:textColor="@color/text_bright"
-        android:textSize="@dimen/font_size_big" />
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:padding="@dimen/default_padding"
+            android:text="@string/result_announcement"
+            android:textColor="@color/text_bright"
+            android:textSize="@dimen/font_size_big" />
 
-    <ListView
-        android:id="@+id/result_list"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
-        android:focusable="false" />
+        <ListView
+            android:id="@+id/result_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:focusable="false" />
 
-    <Button
-        android:id="@+id/exit_button"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/button_height"
-        android:layout_margin="@dimen/default_padding"
-        android:text="@string/exit" />
-
-</LinearLayout>
+        <Button
+            android:id="@+id/exit_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_margin="@dimen/default_padding"
+            android:onClick="@{() -> viewModel.onExitButtonClick()}"
+            android:text="@string/exit" />
+    </LinearLayout>
+</layout>

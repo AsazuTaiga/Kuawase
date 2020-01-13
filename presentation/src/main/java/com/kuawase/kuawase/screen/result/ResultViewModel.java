@@ -44,7 +44,7 @@ public class ResultViewModel extends ViewModel {
         soundPlayer = SoundPlayer.getInstance(context);
     }
 
-    void onExitButtonClick() {
+    public void onExitButtonClick() {
         Objects.requireNonNull(soundPlayer);
         soundPlayer.playTapSound();
         dataSource.deleteKukaiInfo();
