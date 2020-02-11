@@ -1,0 +1,41 @@
+@startuml
+title ユースケース：親モードを起動する
+actor user
+participant presentation
+participant model
+
+user -> presentation : 「親モード」ボタン押下
+activate presentation
+presentation -> user : 句会設定画面表示
+deactivate presentation
+@enduml
+
+@startuml
+title ユースケース：子モードを起動する
+actor user
+participant presentation
+participant model
+
+user -> presentation : 「子モード」ボタン押下
+activate presentation
+presentation -> user : 俳句入力画面表示
+deactivate presentation
+@enduml
+
+@startuml
+title ユースケース：句会を開始する
+actor user
+participant presentation
+participant model
+
+user -> presentation : 句会名・開始日・終了日入力
+activate presentation
+user -> presentation : 「句会を開始する」ボタン押下
+presentation -> model : 句会情報作成を依頼
+activate model
+model -> model : 句会情報作成
+return 作成成功or失敗
+deactivate model
+presentation -> user : 俳句読み取り画面表示
+deactivate presentation
+@enduml
