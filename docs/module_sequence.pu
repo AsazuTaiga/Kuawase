@@ -5,6 +5,7 @@ participant Android
 participant presentation
 participant model
 
+activate user
 user -> Android : アプリのアイコン押下
 activate Android
 Android -> presentation : アプリ起動
@@ -20,6 +21,7 @@ actor user
 participant presentation
 participant model
 
+activate user
 user -> presentation : 「子モード」ボタン押下
 activate presentation
 presentation -> user : 俳句入力画面表示
@@ -32,6 +34,7 @@ actor user
 participant presentation
 participant model
 
+activate user
 user -> presentation : 俳句、作者名を入力
 activate presentation
 user -> presentation : 「投句する」ボタン押下
@@ -44,6 +47,7 @@ actor user
 participant presentation
 participant model
 
+activate user
 user -> presentation : 「親モード」ボタン押下
 activate presentation
 presentation -> model : BGM再生
@@ -58,6 +62,7 @@ actor user
 participant presentation
 participant model
 
+activate user
 user -> presentation : 句会名・開始日・終了日入力
 activate presentation
 user -> presentation : 「句会を開始する」ボタン押下
@@ -75,6 +80,7 @@ actor user
 participant presentation
 participant model
 
+activate user
 user -> presentation : 「句会を開始する」ボタン押下
 activate presentation
 return 俳句読み取り画面表示
@@ -86,6 +92,7 @@ actor user
 participant presentation
 participant model
 
+acitvate user
 user -> presentation : 「俳句を読み取る」ボタン押下
 activate presentation
 user -> presentation : QRコード読み取り
@@ -101,6 +108,7 @@ actor user
 participant presentation
 participant model
 
+activate user
 user -> presentation : 「読み取り完了」ボタン押下
 activate presentation
 presentation -> model : 俳句シャッフル
@@ -115,6 +123,7 @@ actor user
 participant presentation
 participant model
 
+acitvate user
 user -> presentation : 加点ボタン押下
 activate presentation
 presentation -> model : 俳句をランダムに加点
@@ -129,6 +138,7 @@ actor user
 participant presentation
 participant model
 
+activate user
 user -> presentation : 減点ボタン押下
 activate presentation
 presentation -> model : 俳句をランダムに減点
@@ -143,6 +153,7 @@ actor user
 participant presentation
 participant model
 
+activate user
 user -> presentation : 「結果を表示する」ボタン押下
 activate presentation
 presentation -> model : 点数順に俳句をソート
