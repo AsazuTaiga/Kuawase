@@ -92,7 +92,7 @@ actor user
 participant presentation
 participant model
 
-acitvate user
+activate user
 user -> presentation : 「俳句を読み取る」ボタン押下
 activate presentation
 user -> presentation : QRコード読み取り
@@ -123,7 +123,7 @@ actor user
 participant presentation
 participant model
 
-acitvate user
+activate user
 user -> presentation : 加点ボタン押下
 activate presentation
 presentation -> model : 俳句をランダムに加点
